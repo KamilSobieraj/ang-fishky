@@ -17,4 +17,7 @@ export class QuotesService {
     const shuffled = this.quotes.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 3);
   }
+  getQuoteCardDetails(index: number) {
+    return this.quotes[index];
+  }
 }

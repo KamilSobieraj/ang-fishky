@@ -1,5 +1,5 @@
-<ng-container *ngFor="let quote of quotes">
-  <div class="card p-3">
+<ng-container *ngFor="let quote of quotes; let i = index">
+  <div class="card p-3" [routerLink]="[i]">
     <blockquote
       class="blockquote mb-0 card-body">
       <p>{{quote.content}}</p>

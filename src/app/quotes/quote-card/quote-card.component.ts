@@ -14,7 +14,4 @@ export class QuoteCardComponent implements OnInit {
   ngOnInit() {
     this.quotes = this.quotesService.getQuotes();
   }
-onCl() {
-    console.log(this.quotes[0].content);
-}
 }
