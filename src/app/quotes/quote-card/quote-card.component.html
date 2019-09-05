@@ -1,12 +1,19 @@
-
+<ng-container *ngFor="let quote of quotes">
   <div class="card p-3">
-    <blockquote class="blockquote mb-0 card-body">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    <blockquote
+      class="blockquote mb-0 card-body">
+      <p>{{quote.content}}</p>
       <footer class="blockquote-footer">
         <small class="text-muted">
-          Someone famous in <cite title="Source Title">Source Title</cite>
+          <ng-container *ngIf="quote.author.length > 0">
+          {{quote.author}}
+          </ng-container>
+          <ng-container *ngIf="quote.bookName.length > 0">
+            in
+            <cite title="Source Title">{{quote.bookName}}</cite>
+          </ng-container>
         </small>
       </footer>
     </blockquote>
   </div>
-
+</ng-container>

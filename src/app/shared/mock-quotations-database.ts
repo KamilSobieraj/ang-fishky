@@ -69,5 +69,85 @@ export const Quotations: Quotation[] = [
     '2018',
     'Wydawcnitwo Krytyki Politycznej',
     ['Polityka']
+  ),
+  new Quotation(
+    '08',
+    'Nie może chodzić, bo mu zawadą są - skrzydła.',
+    'Charles Baudelaire',
+    'Albatros',
+    '',
+    '',
+    '',
+    []
+  ),
+  new Quotation(
+    '09',
+    'Księgi nie po to są, by w nie wierzyć, lecz by poddawać je badaniu. Mając przed sobą księgę, nie powinniśmy zadawać sobie pytania, co ona zawiera, ale co chce powiedzieć [...]. ',
+    'Umberto Eco',
+    'Imię róży',
+    '439',
+    '',
+    '',
+    []
+  ),
+  new Quotation(
+    '10',
+    'Nie ćwicz aż ci wyjdzie. Ćwicz tak długo aż przestaniesz popełniać błędy.',
+    'Andrea Pirlo',
+    '',
+    '',
+    '',
+    '',
+    []
+  ),
+  new Quotation(
+    '11',
+    'Gazety toną. Co robi człowiek, kiedy tonie? Krzyczy. Więc gazety krzyczą. Np. o celebrytach.',
+    'Timothy Gordon Ash',
+    '',
+    '',
+    '',
+    '',
+    ['Prasa']
+  ),
+  new Quotation(
+    '12',
+    'Don\'t take him literally but take him seriously. [about Donald Trump]',
+    '',
+    '',
+    '',
+    '',
+    '',
+    ['Polityka', 'Trump']
+  ),
+  new Quotation(
+    '13',
+    'Post-prawda, to wyższość narracji nad faktami.',
+    'Kamil Sobieraj',
+    '',
+    '',
+    '',
+    '',
+    []
+  ),
+  new Quotation(
+    '14',
+    'Według dotychczas przeprowadzonych badań opinia Amerykanów musi osiągnąć poziom konsensusu, czyli co najmniej 60%, aby mogła bezpośrednio wpłynąć na proces decyzyjny w kwestiach dotyczących polityki zagranicznej [USA].',
+    'Patrycja Sasnal',
+    'Pseudostabilizacja. Problemy współczesnej polityki USA na Bliskim Wschodzie',
+    '69',
+    '2016',
+    'Wydawnictwo Naukowe PWN',
+    ['Politya', 'USA', 'Sprawy Międzynarodowe']
+  ),
+  new Quotation(
+    '15',
+    'Ni ma autora, ale jest książka',
+    '',
+    'Książka, którą kiedyś napiszę',
+    '',
+    '',
+    '',
+    []
   )
 ];

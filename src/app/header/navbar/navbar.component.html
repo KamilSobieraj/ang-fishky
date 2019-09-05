@@ -5,8 +5,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item active" routerLink="quotes/all">
         <a class="nav-link" >Quotations</a>
+      </li>
+      <li class="nav-item active" routerLink="quotes/random">
+        <a class="nav-link" >Random 10 quotes</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" >Authors</a>
@@ -16,6 +19,11 @@
       </li>
       <app-navbar-dropdown></app-navbar-dropdown>
     </ul>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link">Add new quote</a></li>
+    </ul>
+
     <app-search-box></app-search-box>
   </div>
 </nav>

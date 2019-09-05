@@ -11,6 +11,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarDropdownComponent } from './header/navbar/navbar-dropdown/navbar-dropdown.component';
 import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteCardComponent } from './quotes/quote-card/quote-card.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RandomQuotesComponent } from './quotes/random-quotes/random-quotes.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { QuoteCardComponent } from './quotes/quote-card/quote-card.component';
     NavbarDropdownComponent,
     QuotesComponent,
     QuoteCardComponent,
+    PageNotFoundComponent,
+    RandomQuotesComponent,
   ],
   imports: [
     BrowserModule,
