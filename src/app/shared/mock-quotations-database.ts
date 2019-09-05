@@ -49,7 +49,7 @@ export const Quotations: Quotation[] = [
     '2018',
     'Wydawcnitwo Krytyki Politycznej',
     ['Twitter', 'Polityka']
-  )
+  ),
   new Quotation(
     '06',
     'Dlaczego ludzie, którzy ciężko pracują, by posłać swoje dzieci na najlepsze na świecie uniwersytety, nie chcą zaufać absolwentom tych samych uczelni?',

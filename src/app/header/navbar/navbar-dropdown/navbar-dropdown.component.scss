@@ -1,0 +1,8 @@
+.baton{
+  color: black;
+  border: none;
+  &:hover, &:active{
+    color: white;
+    background-color: black;
+  }
+}
