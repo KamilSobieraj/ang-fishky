@@ -1,11 +1,7 @@
-// TODO: make navbar 'Random 10 quotes' an observable
-
-
-
-
 import { Injectable } from '@angular/core';
 import {Quotations} from '../shared/mock-quotations-database';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {Quotation} from '../shared/quotation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +10,7 @@ export class QuotesService {
   allQuotes = Quotations;
   isRandomModeActive: boolean;
   private isRandomModeActive$ = new BehaviorSubject(false);
+  private randomChange$ = new Subject<Quotation[]>();
 
   constructor() { }
 
