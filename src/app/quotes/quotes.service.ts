@@ -1,30 +1,36 @@
+// TODO: make navbar 'Random 10 quotes' an observable
+
+
+
+
 import { Injectable } from '@angular/core';
 import {Quotations} from '../shared/mock-quotations-database';
-import {Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuotesService {
   allQuotes = Quotations;
-  private randomQuestSet$ = new Subject();
+  isRandomModeActive: boolean;
+  private isRandomModeActive$ = new BehaviorSubject(false);
 
   constructor() { }
 
-  getNewRandomSet() {
-    this.randomQuestSet$.next(this.pickTenRandomQuotes());
+  getAllQuotes() {
+    return this.allQuotes;
   }
-  pickTenRandomQuotes() {
+  getTenRandomQuotes() {
     const shuffled = this.allQuotes.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 3);
   }
-  setTenNewRandomQuotesSet(): Observable<any> {
-    this.getNewRandomSet();
-    return this.randomQuestSet$.asObservable();
-  }
 
-  getAllQuotes() {
-    return this.allQuotes;
+  setRandomMode(value) {
+    this.isRandomModeActive$.next(value);
+    this.getRandomModeStatus().subscribe(newModeStatus => this.isRandomModeActive = newModeStatus);
+  }
+  getRandomModeStatus(): Observable<boolean> {
+    return this.isRandomModeActive$.asObservable();
   }
 
   getQuoteCardDetails(index: number) {

@@ -12,7 +12,6 @@ import { NavbarDropdownComponent } from './header/navbar/navbar-dropdown/navbar-
 import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteCardComponent } from './quotes/quote-card/quote-card.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { RandomQuotesComponent } from './quotes/random-quotes/random-quotes.component';
 import { QuoteCardDetailsComponent } from './quotes/quote-card-details/quote-card-details.component';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { QuoteCardDetailsComponent } from './quotes/quote-card-details/quote-car
     QuotesComponent,
     QuoteCardComponent,
     PageNotFoundComponent,
-    RandomQuotesComponent,
     QuoteCardDetailsComponent,
   ],
   imports: [

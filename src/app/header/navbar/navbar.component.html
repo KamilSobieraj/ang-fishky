@@ -6,9 +6,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active" routerLink="quotes/all">
-        <a class="nav-link" >Quotations</a>
+        <a class="nav-link" (click)="onQuotationsClick()">Quotations</a>
       </li>
-      <li class="nav-item active" routerLink="quotes/random" (click)="onNewRandomQuotesSet()">
+      <li class="nav-item active" (click)="onNewRandomQuotesSet()">
         <a class="nav-link" >Random 10 quotes</a>
       </li>
       <li class="nav-item active">
@@ -17,8 +17,7 @@
       <li class="nav-item">
         <a class="nav-link">Books</a>
       </li>
-      <li *ngIf="this.router.routerState.snapshot.url === '/quotes/random'"
-          class="nav-item"
+      <li class="nav-item"
           (click)="onNewRandomQuotesSet()"
       >
         <a class="nav-link">Reload</a>
