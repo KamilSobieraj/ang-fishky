@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {QuotesService} from '../../quotes/quotes.service';
+import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterLinkWithHref, RouterState} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +9,13 @@ import {QuotesService} from '../../quotes/quotes.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+              private quotesService: QuotesService
+  ) { }
 
   ngOnInit() {
+  }
+  onNewRandomQuotesSet() {
+    this.quotesService.setTenNewRandomQuotesSet();
   }
 }

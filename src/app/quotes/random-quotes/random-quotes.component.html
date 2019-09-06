@@ -1,4 +1,3 @@
-<button (click)="onNewRandomQuotesSet()">New Quotes Set</button>
 <ng-container *ngFor="let quote of randomQuotes; let i = index">
   <div class="card p-3" [routerLink]="[i]">
     <blockquote
@@ -6,7 +5,13 @@
       <p>{{quote.content}}</p>
       <footer class="blockquote-footer">
         <small class="text-muted">
-          {{quote.author}} in <cite title="Source Title">{{quote.bookName}}</cite>
+          <ng-container *ngIf="quote.author.length > 0">
+          {{quote.author}}
+          </ng-container>
+          <ng-container *ngIf="quote.bookName.length > 0">
+            in
+            <cite title="Source Title">{{quote.bookName}}</cite>
+          </ng-container>
         </small>
       </footer>
     </blockquote>

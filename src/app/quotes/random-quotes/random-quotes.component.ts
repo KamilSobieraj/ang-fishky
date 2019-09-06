@@ -12,10 +12,7 @@ export class RandomQuotesComponent implements OnInit {
   constructor(private quoteService: QuotesService) { }
 
   ngOnInit() {
-    this.randomQuotes = this.quoteService.getTenRandomQuotes();
+    this.randomQuotes = this.quoteService.pickTenRandomQuotes();
+    this.quoteService.setTenNewRandomQuotesSet().subscribe(newRandomSet => this.randomQuotes = newRandomSet);
   }
-  onNewRandomQuotesSet() {
-    this.randomQuotes = this.quoteService.getTenRandomQuotes();
-  }
-
 }

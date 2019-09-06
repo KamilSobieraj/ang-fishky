@@ -1,23 +1,33 @@
 import { Injectable } from '@angular/core';
-import {Quote} from '@angular/compiler';
 import {Quotations} from '../shared/mock-quotations-database';
+import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuotesService {
-  quotes = Quotations;
-  randomSelectedQuotes;
+  allQuotes = Quotations;
+  private randomQuestSet$ = new Subject();
+
   constructor() { }
 
-  getQuotes() {
-    return this.quotes;
+  getNewRandomSet() {
+    this.randomQuestSet$.next(this.pickTenRandomQuotes());
   }
-  getTenRandomQuotes() {
-    const shuffled = this.quotes.sort(() => 0.5 - Math.random());
+  pickTenRandomQuotes() {
+    const shuffled = this.allQuotes.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 3);
   }
+  setTenNewRandomQuotesSet(): Observable<any> {
+    this.getNewRandomSet();
+    return this.randomQuestSet$.asObservable();
+  }
+
+  getAllQuotes() {
+    return this.allQuotes;
+  }
+
   getQuoteCardDetails(index: number) {
-    return this.quotes[index];
+    return this.allQuotes[index];
   }
 }

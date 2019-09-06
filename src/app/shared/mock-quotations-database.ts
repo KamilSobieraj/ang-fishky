@@ -9,7 +9,7 @@ export const Quotations: Quotation[] = [
       '119',
       '',
       'Fundacja Kultura Liberalna',
-      ['USA', 'Largumiberalizm', 'Polityka', 'Partia']),
+      ['USA', 'Liberalizm', 'Polityka', 'Partia']),
   new Quotation(
     '02',
     'W XXI wieku zatem religie nie zajmują się wprawdzie sprowadzaniem deszczu, leczeniem chorób ani budowaniem bomb - ale zaczynają ustalać, kim jesteśmy "my", a kim "oni", kogo powinniśmy leczyć, a kogo bombardować.',

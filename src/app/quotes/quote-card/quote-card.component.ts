@@ -12,6 +12,6 @@ export class QuoteCardComponent implements OnInit {
   quotes: Quotation[];
 
   ngOnInit() {
-    this.quotes = this.quotesService.getQuotes();
+    this.quotes = this.quotesService.getAllQuotes();
   }
 }

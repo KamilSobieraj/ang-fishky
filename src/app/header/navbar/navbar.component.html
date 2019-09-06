@@ -8,14 +8,20 @@
       <li class="nav-item active" routerLink="quotes/all">
         <a class="nav-link" >Quotations</a>
       </li>
-      <li class="nav-item active" routerLink="quotes/random">
+      <li class="nav-item active" routerLink="quotes/random" (click)="onNewRandomQuotesSet()">
         <a class="nav-link" >Random 10 quotes</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" >Authors</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" >Books</a>
+        <a class="nav-link">Books</a>
+      </li>
+      <li *ngIf="this.router.routerState.snapshot.url === '/quotes/random'"
+          class="nav-item"
+          (click)="onNewRandomQuotesSet()"
+      >
+        <a class="nav-link">Reload</a>
       </li>
       <app-navbar-dropdown></app-navbar-dropdown>
     </ul>

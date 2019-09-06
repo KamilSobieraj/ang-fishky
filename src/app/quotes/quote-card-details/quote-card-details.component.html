@@ -1,9 +1,19 @@
 <div class="card p-1" style="width: 80vw">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Author: {{quotation.author}}</li>
-    <li class="list-group-item">Find in: {{quotation.bookName}}, s. {{quotation.pageNumber}}</li>
-    <li class="list-group-item">Editor: {{quotation.editorName}}</li>
-    <li class="list-group-item">Year of publication: {{quotation.publicationYear}}</li>
-    <li *ngFor="let tag of quotation.tags" class="list-group-item">{{tag}}</li>
-  </ul>
+  <div class="row no-gutters">
+    <div class="col-md-2">
+      <img src="..." class="card-img" alt="book image">
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <h5 class="card-title">{{!quotation.author ? quotation.bookName : quotation.author}} quote details:</h5>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Author: {{quotation.author}}</li>
+          <li class="list-group-item">Find in: {{quotation.bookName}}, s. {{quotation.pageNumber}}</li>
+          <li class="list-group-item">Editor: {{quotation.editorName}}</li>
+          <li class="list-group-item">Year of publication: {{quotation.publicationYear}}</li>
+          <li *ngFor="let tag of quotation.tags" class="list-group-item">{{tag}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
