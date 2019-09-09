@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Quotation} from '../../shared/quotation.model';
 import {QuotesService} from '../quotes.service';
 import {ActivatedRoute, Params} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-quote-card-details',
@@ -12,7 +13,8 @@ export class QuoteCardDetailsComponent implements OnInit {
 quotation: Quotation;
 id: number;
   constructor(private quotesService: QuotesService,
-              private router: ActivatedRoute) { }
+              private router: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit() {
       this.router.params.subscribe((params: Params) => {
@@ -21,4 +23,7 @@ id: number;
     });
   }
 
+  onGoBack() {
+    this.location.back();
+  }
 }

@@ -12,7 +12,6 @@ export class AuthorsComponent implements OnInit {
 
   ngOnInit() {
     this.allQuotes = this.authorsService.getAuthorsWithBooks();
-    console.log(this.allQuotes);
   }
 
 }
