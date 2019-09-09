@@ -8,18 +8,25 @@ import {Quotation} from '../shared/quotation.model';
 })
 export class QuotesService {
   allQuotes = Quotations;
-  isRandomModeActive: boolean;
+  isRandomModeActive = false;
+
   private isRandomModeActive$ = new BehaviorSubject(false);
-  private randomChange$ = new Subject<Quotation[]>();
+  private quotesSet$ = new Subject<Quotation[]>();
 
   constructor() { }
 
   getAllQuotes() {
     return this.allQuotes;
   }
-  getTenRandomQuotes() {
+  pickTenRandomQuotes() {
     const shuffled = this.allQuotes.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 3);
+  }
+  setNewQuotesSet() {
+    this.isRandomModeActive ? this.quotesSet$.next(this.pickTenRandomQuotes())  : this.quotesSet$.next(this.getAllQuotes());
+  }
+  getNewQuotesSet(): Observable<Quotation[]> {
+    return this.quotesSet$.asObservable();
   }
 
   setRandomMode(value) {

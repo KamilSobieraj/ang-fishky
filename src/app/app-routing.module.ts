@@ -11,7 +11,7 @@ const routes: Routes = [
       {path: 'all', component: QuoteCardComponent},
       {path: 'all/:id', component: QuoteCardDetailsComponent},
     ]},
-  {path: '', redirectTo: 'quotes', pathMatch: 'full'},
+  {path: '', redirectTo: 'quotes/all', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 

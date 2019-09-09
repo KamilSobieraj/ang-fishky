@@ -17,9 +17,10 @@ export class NavbarComponent implements OnInit {
   }
   onQuotationsClick() {
     this.quotesService.setRandomMode(false);
+    this.quotesService.setNewQuotesSet();
   }
   onNewRandomQuotesSet() {
-    this.quotesService.getTenRandomQuotes();
     this.quotesService.setRandomMode(true);
+    this.quotesService.setNewQuotesSet();
   }
 }

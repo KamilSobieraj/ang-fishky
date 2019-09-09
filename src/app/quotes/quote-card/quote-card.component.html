@@ -1,8 +1,8 @@
-<ng-container *ngFor="let quote of (randomModeStatus ? randomQuotes : allQuotes); let i = index">
+<ng-container
+  *ngFor="let quote of quotes; let i = index">
   <div class="card p-3" [routerLink]="[i]">
     <blockquote
       class="blockquote mb-0 card-body">
-      <h1>{{randomModeStatus}}</h1>
       <p>{{quote.content}}</p>
       <footer class="blockquote-footer">
         <small class="text-muted">

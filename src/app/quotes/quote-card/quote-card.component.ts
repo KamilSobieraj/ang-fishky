@@ -9,14 +9,12 @@ import {Quotation} from '../../shared/quotation.model';
 })
 export class QuoteCardComponent implements OnInit {
   constructor(private quotesService: QuotesService) { }
-  allQuotes: Quotation[];
-  randomQuotes: Quotation[];
   randomModeStatus: boolean;
+  quotes: Quotation[];
 
   ngOnInit() {
-    this.allQuotes = this.quotesService.getAllQuotes();
-    this.randomQuotes = this.quotesService.getTenRandomQuotes();
     this.quotesService.getRandomModeStatus().subscribe(initialRandomModeStatus => this.randomModeStatus = initialRandomModeStatus);
-
+    this.randomModeStatus ? this.quotes = this.quotesService.pickTenRandomQuotes() : this.quotes = this.quotesService.getAllQuotes();
+    this.quotesService.getNewQuotesSet().subscribe(newQuotesSet => this.quotes = newQuotesSet);
   }
 }
