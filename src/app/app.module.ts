@@ -13,6 +13,8 @@ import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteCardComponent } from './quotes/quote-card/quote-card.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { QuoteCardDetailsComponent } from './quotes/quote-card-details/quote-card-details.component';
+import { AuthorsComponent } from './authors/authors.component';
+import {SvgIconComponent} from '../assets/svg-icon.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { QuoteCardDetailsComponent } from './quotes/quote-card-details/quote-car
     QuoteCardComponent,
     PageNotFoundComponent,
     QuoteCardDetailsComponent,
+    AuthorsComponent,
+    SvgIconComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,18 @@
+<div class="row justify-content-center">
+<ngb-accordion
+  *ngFor="let author of allQuotes | keyvalue; let i = index"
+  [closeOthers]="true" activeIds="static-1" class="col-6">
+  <ngb-panel id="static-{{i}}">
+    <ng-template ngbPanelTitle>
+{{author.key ? author.key : 'Anonymous'}}
+    </ng-template>
+    <ng-template ngbPanelContent >
+      <ul *ngFor="let book of author.value">
+        <li [routerLink]="['/quotes', 'all', book.id]">
+        {{book.content}}
+      </li>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+</div>

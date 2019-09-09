@@ -4,6 +4,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {QuotesComponent} from './quotes/quotes.component';
 import {QuoteCardComponent} from './quotes/quote-card/quote-card.component';
 import {QuoteCardDetailsComponent} from './quotes/quote-card-details/quote-card-details.component';
+import {AuthorsComponent} from './authors/authors.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
       {path: 'all', component: QuoteCardComponent},
       {path: 'all/:id', component: QuoteCardDetailsComponent},
     ]},
+  {path: 'authors', component: AuthorsComponent},
   {path: '', redirectTo: 'quotes/all', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];

@@ -149,5 +149,23 @@ export const Quotations: Quotation[] = [
     '',
     '',
     []
-  )
+  ),
+  new Quotation(
+    '16',
+    'Zmyślamy 1',
+    'Kamil Sobieraj',
+    'Wyświetli jako drugą?',
+    '',
+    '',
+    '',
+    []),
+  new Quotation(
+    '17',
+    'Zmyślamy 2',
+    'Kamil Sobieraj',
+    'Wyświetli jako trzecią?',
+    '',
+    '',
+    '',
+    [])
 ];

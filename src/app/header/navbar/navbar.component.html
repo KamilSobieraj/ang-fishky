@@ -5,10 +5,16 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active" routerLink="quotes/all">
-        <a class="nav-link" (click)="onQuotationsClick()">Quotations</a>
+      <li class="nav-item active"
+          routerLinkActive="active"
+          routerLink="quotes/all"
+          (click)="onQuotationsClick()">
+        <a class="nav-link" >Quotations</a>
       </li>
-      <li class="nav-item active" routerLink="quotes/all" (click)="onNewRandomQuotesSet()">
+      <li class="nav-item"
+          routerLinkActive="active"
+          routerLink="quotes/all"
+          (click)="onNewRandomQuotesSet()">
         <a class="nav-link" >Random 10 quotes</a>
       </li>
       <li class="nav-item active">

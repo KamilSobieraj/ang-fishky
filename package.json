@@ -21,6 +21,9 @@
     "@angular/router": "~8.2.4",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "bootstrap": "^4.3.1",
+    "lodash.groupby": "^4.6.0",
+    "lodash.mapvalues": "^4.6.0",
+    "lodash.omit": "^4.5.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
