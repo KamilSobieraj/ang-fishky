@@ -5,6 +5,7 @@ import {QuotesComponent} from './quotes/quotes.component';
 import {QuoteCardComponent} from './quotes/quote-card/quote-card.component';
 import {QuoteCardDetailsComponent} from './quotes/quote-card-details/quote-card-details.component';
 import {AuthorsComponent} from './authors/authors.component';
+import {AddQuoteFormComponent} from './admin/add-quote-form/add-quote-form.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
       {path: 'all/:id', component: QuoteCardDetailsComponent},
     ]},
   {path: 'authors', component: AuthorsComponent},
+  {path: 'admin', component: AddQuoteFormComponent},
   {path: '', redirectTo: 'quotes/all', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];

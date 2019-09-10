@@ -2,5 +2,8 @@
   <h1>Fishky app!</h1>
   <h3>It's gonna be a brilliant index card app.</h3>
   <hr>
+  <ul *ngFor="let item of list">
+    <li>{{item.payload.doc.data().author}}</li>
+  </ul>
   <app-navbar></app-navbar>
 </div>

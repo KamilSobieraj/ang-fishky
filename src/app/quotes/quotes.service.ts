@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {Quotations} from '../shared/mock-quotations-database';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Quotation} from '../shared/quotation.model';
+import {FirebaseListObservable} from '@angular/fire/database-deprecated';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +12,21 @@ import {Quotation} from '../shared/quotation.model';
 export class QuotesService {
   allQuotes = Quotations;
   isRandomModeActive = false;
-
   private isRandomModeActive$ = new BehaviorSubject(false);
   private quotesSet$ = new Subject<Quotation[]>();
+  quotes: Observable<Quotation[]>;
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) {
 
+  }
+  getQuotesFromDB() {
+    return this.firestore.collection('quotes').snapshotChanges();
+  }
+  addNewQuote(quote) {
+    return new Promise<any>((res, rej) => {
+      this.firestore.collection('quotes').add(quote).then(res => {}, err => rej(err));
+    });
+}
   getAllQuotes() {
     return this.allQuotes;
   }

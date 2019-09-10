@@ -9,7 +9,8 @@ export const Quotations: Quotation[] = [
       '119',
       '',
       'Fundacja Kultura Liberalna',
-      ['USA', 'Liberalizm', 'Polityka', 'Partia']),
+      ['USA', 'Liberalizm', 'Polityka', 'Partia'],
+      ''),
   new Quotation(
     '02',
     'W XXI wieku zatem religie nie zajmują się wprawdzie sprowadzaniem deszczu, leczeniem chorób ani budowaniem bomb - ale zaczynają ustalać, kim jesteśmy "my", a kim "oni", kogo powinniśmy leczyć, a kogo bombardować.',
@@ -18,7 +19,8 @@ export const Quotations: Quotation[] = [
     '179',
     'Unknown',
     'Wydawnictwo Literackie',
-    ['Religia']
+    ['Religia'],
+    ''
   ),
   new Quotation(
     '03',
@@ -28,7 +30,8 @@ export const Quotations: Quotation[] = [
     '10',
     '2016',
     'Replika',
-    []
+    [],
+    ''
   ),
   new Quotation(
     '04',
@@ -38,7 +41,8 @@ export const Quotations: Quotation[] = [
     '109',
     '2017',
     'Wydawcnitwo Krytyki Politycznej',
-    ['Polityka', 'Europa', 'Unia Europejska', 'Populizm']
+    ['Polityka', 'Europa', 'Unia Europejska', 'Populizm'],
+    ''
   ),
   new Quotation(
     '05',
@@ -48,7 +52,8 @@ export const Quotations: Quotation[] = [
     '103',
     '2018',
     'Wydawcnitwo Krytyki Politycznej',
-    ['Twitter', 'Polityka']
+    ['Twitter', 'Polityka'],
+    ''
   ),
   new Quotation(
     '06',
@@ -58,7 +63,8 @@ export const Quotations: Quotation[] = [
     '105',
     '2018',
     'Wydawcnitwo Krytyki Politycznej',
-    []
+    [],
+    ''
   ),
   new Quotation(
     '07',
@@ -68,7 +74,8 @@ export const Quotations: Quotation[] = [
     '112',
     '2018',
     'Wydawcnitwo Krytyki Politycznej',
-    ['Polityka']
+    ['Polityka'],
+    ''
   ),
   new Quotation(
     '08',
@@ -78,7 +85,8 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    []
+    [],
+    ''
   ),
   new Quotation(
     '09',
@@ -88,7 +96,8 @@ export const Quotations: Quotation[] = [
     '439',
     '',
     '',
-    []
+    [],
+    ''
   ),
   new Quotation(
     '10',
@@ -98,7 +107,8 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    []
+    [],
+    ''
   ),
   new Quotation(
     '11',
@@ -108,7 +118,8 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    ['Prasa']
+    ['Prasa'],
+    ''
   ),
   new Quotation(
     '12',
@@ -118,7 +129,8 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    ['Polityka', 'Trump']
+    ['Polityka', 'Trump'],
+    ''
   ),
   new Quotation(
     '13',
@@ -128,7 +140,8 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    []
+    [],
+    ''
   ),
   new Quotation(
     '14',
@@ -138,7 +151,8 @@ export const Quotations: Quotation[] = [
     '69',
     '2016',
     'Wydawnictwo Naukowe PWN',
-    ['Politya', 'USA', 'Sprawy Międzynarodowe']
+    ['Politya', 'USA', 'Sprawy Międzynarodowe'],
+    ''
   ),
   new Quotation(
     '15',
@@ -148,7 +162,8 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    []
+    [],
+    ''
   ),
   new Quotation(
     '16',
@@ -158,7 +173,9 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    []),
+    [],
+    ''
+  ),
   new Quotation(
     '17',
     'Zmyślamy 2',
@@ -167,5 +184,7 @@ export const Quotations: Quotation[] = [
     '',
     '',
     '',
-    [])
+    [],
+    ''
+  )
 ];

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,6 +14,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { QuoteCardDetailsComponent } from './quotes/quote-card-details/quote-card-details.component';
 import { AuthorsComponent } from './authors/authors.component';
 import {SvgIconComponent} from '../assets/svg-icon.component';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import { AddQuoteFormComponent } from './admin/add-quote-form/add-quote-form.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore';
+import { ChipsInputComponent } from './admin/add-quote-form/chips-input/chips-input.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatAutocompleteModule, MatFormFieldModule, MatIconModule, MatNativeDateModule} from '@angular/material';
+import {MaterialModule} from './material/material.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,14 +40,30 @@ import {SvgIconComponent} from '../assets/svg-icon.component';
     PageNotFoundComponent,
     QuoteCardDetailsComponent,
     AuthorsComponent,
-    SvgIconComponent
+    SvgIconComponent,
+    AddQuoteFormComponent,
+    ChipsInputComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    AngularFireAuthModule,
+    BrowserAnimationsModule,
+    MatChipsModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MaterialModule,
+    HttpClientModule,
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,7 +6,8 @@ constructor(public id: string,
             public pageNumber: string,
             public publicationYear: string,
             public editorName: string,
-            public tags: string[]) {}
+            public tags: string[],
+            public remarks: string) {}
 }
 
 // Firebase will be used, so id as a string will work better
