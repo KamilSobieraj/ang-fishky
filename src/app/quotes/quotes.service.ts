@@ -37,7 +37,7 @@ export class QuotesService {
     return this.isRandomModeActive$.asObservable();
   }
 
-  getQuoteCardDetails(index: number) {
-    return this.allQuotes[index];
+  getQuoteCardDetails(index: string) {
+    return this.allQuotes.find(quote => quote.id === index);
   }
 }
