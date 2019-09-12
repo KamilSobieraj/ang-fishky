@@ -1,55 +1,64 @@
-import { Injectable } from '@angular/core';
-import {Quotations} from '../shared/mock-quotations-database';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Quotation} from '../shared/quotation.model';
-import {FirebaseListObservable} from '@angular/fire/database-deprecated';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
-import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Quote} from '../shared/Quote.model';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuotesService {
-  allQuotes = Quotations;
-  isRandomModeActive = false;
+  isRandomModeActive: boolean;
   private isRandomModeActive$ = new BehaviorSubject(false);
   private quotesSet$ = new Subject<Quotation[]>();
-  quotes: Observable<Quotation[]>;
+  allQuotes: Observable<any>;
+  quotes: Quotation[];
 
   constructor(private firestore: AngularFirestore) {
-
+    this.allQuotes = this.firestore.collection('quotes').valueChanges({idField: 'id'});
+    this.allQuotes.subscribe(res => this.quotes = res);
   }
   getQuotesFromDB() {
-    return this.firestore.collection('quotes').snapshotChanges();
+    return this.firestore.collection('quotes').valueChanges({idField: 'id'});
   }
-  addNewQuote(quote) {
-    return new Promise<any>((res, rej) => {
-      this.firestore.collection('quotes').add(quote).then(res => {}, err => rej(err));
-    });
-}
-  getAllQuotes() {
-    return this.allQuotes;
-  }
-  pickTenRandomQuotes() {
-    const shuffled = this.allQuotes.sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
-  }
+
   setNewQuotesSet() {
-    this.isRandomModeActive ? this.quotesSet$.next(this.pickTenRandomQuotes())  : this.quotesSet$.next(this.getAllQuotes());
+    this.isRandomModeActive ? this.quotesSet$.next(this.pickTenRandomQuotes()) : this.quotesSet$.next(this.quotes);
   }
+
   getNewQuotesSet(): Observable<Quotation[]> {
     return this.quotesSet$.asObservable();
+  }
+
+  pickTenRandomQuotes() {
+    const shuffled = this.quotes.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 3);
   }
 
   setRandomMode(value) {
     this.isRandomModeActive$.next(value);
     this.getRandomModeStatus().subscribe(newModeStatus => this.isRandomModeActive = newModeStatus);
   }
+
   getRandomModeStatus(): Observable<boolean> {
     return this.isRandomModeActive$.asObservable();
   }
 
   getQuoteCardDetails(index: string) {
-    return this.allQuotes.find(quote => quote.id === index);
+    return this.quotes.find(quote => quote.id === index);
   }
+
+  addNewQuote(quote) {
+    return new Promise<any>((res, rej) => {
+      this.firestore.collection('quotes').add(quote).then(res => {
+      }, err => rej(err));
+    });
+  }
+
+  deleteQuote(quote) {
+    return this.firestore.collection('quotes').doc(quote.id).delete();
+  }
+
+
 }

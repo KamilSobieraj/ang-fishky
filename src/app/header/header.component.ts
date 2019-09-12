@@ -11,13 +11,9 @@ import {Quote} from '../shared/Quote.model';
 export class HeaderComponent implements OnInit {
   list;
 
-  constructor(private quotesService: QuotesService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.getData();
   }
-  getData() {
-    this.quotesService.getQuotesFromDB().subscribe(quotes => this.list = quotes);
-}
 }

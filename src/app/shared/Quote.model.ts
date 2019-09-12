@@ -1,11 +1,11 @@
 export interface Quote {
-  // id: string;
+  id?: string;
   content: string;
   author: string;
   bookName: string;
-   pageNumber: string;
-   publicationYear: string;
-   editorName: string;
-   tags: string[];
-   remarks: string;
+  pageNumber: string;
+  publicationYear: string;
+  editorName: string;
+  tags: string[];
+  remarks: string;
 }

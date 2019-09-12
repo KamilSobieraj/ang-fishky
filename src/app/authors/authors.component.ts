@@ -8,10 +8,10 @@ import {AuthorsService} from './authors.service';
 })
 export class AuthorsComponent implements OnInit {
   allQuotes;
+
   constructor(private authorsService: AuthorsService) { }
 
   ngOnInit() {
-    this.allQuotes = this.authorsService.getAuthorsWithBooks();
+    this.allQuotes = this.authorsService.getQuotesSortedByAuthors();
   }
-
 }
