@@ -8,7 +8,6 @@ export class FormService {
   private formTags$ = new Subject<string[]>();
   private formAllTags$ = new Subject<[]>();
   tags: string[] = [];
-  allTags: string[] = ['Polityka', 'Środowisko'];
 
   constructor() { }
 

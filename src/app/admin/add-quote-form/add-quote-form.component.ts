@@ -1,10 +1,10 @@
 // TODO: clear form in better way + clear tags field in chips-input-component
 // TODO: add choose list for authors, books etc.
 import { Component, OnInit } from '@angular/core';
-import {Quote} from '../../shared/Quote.model';
 import {QuotesService} from '../../quotes/quotes.service';
 import {FormService} from './form.service';
 import {Router} from '@angular/router';
+import {Quotation} from '../../shared/quotation.model';
 
 @Component({
   selector: 'app-add-quote-form',
@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./add-quote-form.component.scss']
 })
 export class AddQuoteFormComponent implements OnInit {
-  quote: Quote;
+  quote: Quotation;
   constructor(private quotesService: QuotesService,
               private formService: FormService,
               private router: Router) {
@@ -34,7 +34,7 @@ export class AddQuoteFormComponent implements OnInit {
   // TODO: clear form in better way + clear tags field in chips-input-component
   onSubmitForm() {
     this.quotesService.addNewQuote(this.quote);
-    alert("New quotation added!");
+    alert('New quotation added!');
     this.quote = {
       // id: '15',
       content: '',

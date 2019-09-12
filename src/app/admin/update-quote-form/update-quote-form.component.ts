@@ -2,11 +2,11 @@
 // TODO: add choose list for authors, books etc.
 
 import { Component, OnInit } from '@angular/core';
-import {Quote} from '../../shared/Quote.model';
 import {QuotesService} from '../../quotes/quotes.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import {FormService} from '../add-quote-form/form.service';
 import {Location} from '@angular/common';
+import {Quotation} from '../../shared/quotation.model';
 
 @Component({
   selector: 'app-update-quote-form',
@@ -14,8 +14,8 @@ import {Location} from '@angular/common';
   styleUrls: ['./update-quote-form.component.scss']
 })
 export class UpdateQuoteFormComponent implements OnInit {
-  chosenQuote;
-  quote: Quote;
+  chosenQuote: Quotation;
+  quote: Quotation;
   id: string;
   constructor(private quotesService: QuotesService,
               private formService: FormService,
@@ -32,7 +32,6 @@ export class UpdateQuoteFormComponent implements OnInit {
     this.formService.getFormTags().subscribe(tags => this.quote.tags = tags);
 
     this.quote = {
-      // id: '15',
       content: this.chosenQuote.content,
       author: this.chosenQuote.author,
       bookName: this.chosenQuote.bookName,

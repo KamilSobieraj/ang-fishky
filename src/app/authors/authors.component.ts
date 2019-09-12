@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthorsService} from './authors.service';
+import {Quotation} from '../shared/quotation.model';
 
 @Component({
   selector: 'app-authors',
@@ -7,7 +8,7 @@ import {AuthorsService} from './authors.service';
   styleUrls: ['./authors.component.scss']
 })
 export class AuthorsComponent implements OnInit {
-  allQuotes;
+  allQuotes: Quotation[];
 
   constructor(private authorsService: AuthorsService) { }
 

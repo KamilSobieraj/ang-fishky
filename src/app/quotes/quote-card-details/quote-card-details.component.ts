@@ -21,7 +21,6 @@ id: string;
   ngOnInit() {
       this.router.params.subscribe((params: Params) => {
       this.id = params['id'];
-      // this.quotation = this.quotesService.getQuoteCardDetails(this.id);
       this.getQuoteCardDetails();
     });
   }

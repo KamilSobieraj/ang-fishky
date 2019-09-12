@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Quotation} from '../shared/quotation.model';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Quote} from '../shared/Quote.model';
-
 
 @Injectable({
   providedIn: 'root'
