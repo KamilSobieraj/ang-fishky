@@ -60,5 +60,9 @@ export class QuotesService {
     return this.firestore.collection('quotes').doc(quote.id).delete();
   }
 
+  updateQuote(oldQuoteData, updatedQuoteData) {
+    const quote = this.firestore.doc(`quotes/${oldQuoteData.id}`);
+    quote.update({...updatedQuoteData});
 
+  }
 }

@@ -26,6 +26,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule, MatFormFieldModule, MatIconModule, MatNativeDateModule} from '@angular/material';
 import {MaterialModule} from './material/material.module';
 import {HttpClientModule} from '@angular/common/http';
+import { UpdateQuoteFormComponent } from './admin/update-quote-form/update-quote-form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {HttpClientModule} from '@angular/common/http';
     AuthorsComponent,
     SvgIconComponent,
     AddQuoteFormComponent,
-    ChipsInputComponent
+    ChipsInputComponent,
+    UpdateQuoteFormComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

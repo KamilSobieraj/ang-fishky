@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import {Quote} from '../../shared/Quote.model';
 import {QuotesService} from '../../quotes/quotes.service';
 import {FormService} from './form.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-quote-form',
@@ -13,7 +14,8 @@ import {FormService} from './form.service';
 export class AddQuoteFormComponent implements OnInit {
   quote: Quote;
   constructor(private quotesService: QuotesService,
-              private formService: FormService) {
+              private formService: FormService,
+              private router: Router) {
     this.quote = {
       // id: '15',
       content: '',
@@ -44,5 +46,6 @@ export class AddQuoteFormComponent implements OnInit {
       tags: [],
       remarks: ''
     };
+    this.router.navigate(['quotes/all']);
   }
 }

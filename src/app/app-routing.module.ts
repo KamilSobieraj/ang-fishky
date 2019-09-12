@@ -6,13 +6,15 @@ import {QuoteCardComponent} from './quotes/quote-card/quote-card.component';
 import {QuoteCardDetailsComponent} from './quotes/quote-card-details/quote-card-details.component';
 import {AuthorsComponent} from './authors/authors.component';
 import {AddQuoteFormComponent} from './admin/add-quote-form/add-quote-form.component';
+import {UpdateQuoteFormComponent} from './admin/update-quote-form/update-quote-form.component';
 
 
 const routes: Routes = [
   {path: 'quotes', component: QuotesComponent, children: [
       {path: 'all', component: QuoteCardComponent},
-      {path: 'all/:id', component: QuoteCardDetailsComponent},
+      {path: 'all/:id', component: QuoteCardDetailsComponent}
     ]},
+  {path: 'quotes/all/:id/update', component: UpdateQuoteFormComponent},
   {path: 'authors', component: AuthorsComponent},
   {path: 'admin', component: AddQuoteFormComponent},
   {path: '', redirectTo: 'quotes/all', pathMatch: 'full'},
