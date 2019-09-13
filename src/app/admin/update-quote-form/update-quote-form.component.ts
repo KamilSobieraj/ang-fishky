@@ -1,12 +1,14 @@
 // TODO: fix chips - old ones appears when new chip is added
 // TODO: add choose list for authors, books etc.
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {QuotesService} from '../../quotes/quotes.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {FormService} from '../add-quote-form/form.service';
 import {Location} from '@angular/common';
 import {Quotation} from '../../shared/quotation.model';
+import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-update-quote-form',
@@ -17,6 +19,21 @@ export class UpdateQuoteFormComponent implements OnInit {
   chosenQuote: Quotation;
   quote: Quotation;
   id: string;
+
+  @ViewChild('authorInstance', {static: true}) authorInstance: NgbTypeahead;
+  authorFocus$ = new Subject<string>();
+  authorClick$ = new Subject<string>();
+  @ViewChild('bookNameInstance', {static: true}) bookNameInstance: NgbTypeahead;
+  bookNameFocus$ = new Subject<string>();
+  bookNameClick$ = new Subject<string>();
+  @ViewChild('editorNameInstance', {static: true}) editorNameInstance: NgbTypeahead;
+  editorNameFocus$ = new Subject<string>();
+  editorNameClick$ = new Subject<string>();
+
+  searchAuthor = this.formService.searchTemplate('author', this.authorClick$, this.authorFocus$);
+  searchBookName = this.formService.searchTemplate('bookName', this.bookNameClick$, this.bookNameFocus$);
+  searchEditorName = this.formService.searchTemplate('editorName', this.editorNameClick$, this.editorNameFocus$);
+
   constructor(private quotesService: QuotesService,
               private formService: FormService,
               private activatedRoute: ActivatedRoute,

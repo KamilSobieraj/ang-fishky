@@ -3,14 +3,19 @@
     <form (ngSubmit) = "onUpdate()">
       <div class="form-group">
         <label for="author">Author of the quote</label>
-        <input type="text"
-               class="form-control"
-               id="author"
-               aria-describedby="authors name"
-               placeholder="Author"
-               [(ngModel)]="quote.author"
-               name="author"
-        >
+        <input
+          id="author"
+          type="text"
+          class="form-control"
+          aria-describedby="authors name"
+          name="author"
+          placeholder="Author's Name"
+          [(ngModel)]="quote.author"
+          [ngbTypeahead]="searchAuthor"
+          (focus)="authorFocus$.next($event.target.value)"
+          (click)="authorClick$.next($event.target.value)"
+          #authorInstance="ngbTypeahead"
+        />
       </div>
       <div class="form-group">
         <label for="content">Quote</label>
@@ -27,14 +32,18 @@
       </div>
       <div class="form-group">
         <label for="bookName">Book/Newspaper title</label>
-        <input type="text"
-               class="form-control"
-               id="bookName"
-               aria-describedby="Book name"
-               placeholder="Book title, Newspaper"
-               [(ngModel)]="quote.bookName"
-               name="bookName"
-        >
+        <input
+          id="bookName"
+          type="text"
+          class="form-control"
+          aria-describedby="Book name"
+          name="bookName"
+          [(ngModel)]="quote.bookName"
+          [ngbTypeahead]="searchBookName"
+          (focus)="bookNameFocus$.next($event.target.value)"
+          (click)="bookNameClick$.next($event.target.value)"
+          #bookNameInstance="ngbTypeahead"
+        />
       </div>
       <div class="form-group">
         <label for="pageNumber">Page number</label>
@@ -42,7 +51,7 @@
                class="form-control"
                id="pageNumber"
                aria-describedby="Page number"
-               placeholder="Book title, Newspaper"
+               placeholder="Page number"
                [(ngModel)]="quote.pageNumber"
                name="pageNumber"
         >
@@ -60,14 +69,19 @@
       </div>
       <div class="form-group">
         <label for="editorName">Editor name</label>
-        <input type="text"
-               class="form-control"
-               id="editorName"
-               aria-describedby="Name of the Editor"
-               placeholder="Name of the Editor"
-               [(ngModel)]="quote.editorName"
-               name="editorName"
-        >
+        <input
+          id="editorName"
+          type="text"
+          class="form-control"
+          aria-describedby="Editor name"
+          name="editorName"
+          placeholder="Editors' name"
+          [(ngModel)]="quote.editorName"
+          [ngbTypeahead]="searchEditorName"
+          (focus)="editorNameFocus$.next($event.target.value)"
+          (click)="editorNameClick$.next($event.target.value)"
+          #editorNameInstance="ngbTypeahead"
+        />
       </div>
       <div class="form-group">
         <label for="remarks">Remarks</label>

@@ -1,88 +1,102 @@
 <div class="row justify-content-center add-quote-form__container">
-<div class="col-6">
-  <h1>Add new Quote!</h1>
-  <form (ngSubmit) = "onSubmitForm()">
+  <div class="col-6">
+    <h1>Add new Quote!</h1>
+    <form (ngSubmit) = "onSubmitForm()">
+      <div class="form-group">
+        <label for="author">Author of the quote</label>
+        <input
+          id="author"
+          type="text"
+          class="form-control"
+          aria-describedby="authors name"
+          name="author"
+          placeholder="Author's name"
+          [(ngModel)]="quote.author"
+          [ngbTypeahead]="searchAuthor"
+          (focus)="authorFocus$.next($event.target.value)"
+          (click)="authorClick$.next($event.target.value)"
+          #authorInstance="ngbTypeahead"
+        />
+      </div>
     <div class="form-group">
-      <label for="author">Author of the quote</label>
+      <label for="content">Quote</label>
+      <textarea
+        class="form-control"
+        rows="3"
+        id="content"
+        aria-describedby="Quotation"
+        placeholder="Quotation"
+        [(ngModel)]="quote.content"
+        name="content"
+      >
+      </textarea>
+    </div>
+    <div class="form-group">
+      <label for="bookName">Book/Newspaper title</label>
+      <input
+        id="bookName"
+        type="text"
+        class="form-control"
+        aria-describedby="Book name"
+        name="bookName"
+        [(ngModel)]="quote.bookName"
+        [ngbTypeahead]="searchBookName"
+        (focus)="bookNameFocus$.next($event.target.value)"
+        (click)="bookNameClick$.next($event.target.value)"
+        #bookNameInstance="ngbTypeahead"
+      />
+    </div>
+    <div class="form-group">
+      <label for="pageNumber">Page number</label>
       <input type="text"
              class="form-control"
-             id="author"
-             aria-describedby="authors name"
-             placeholder="Author"
-             [(ngModel)]="quote.author"
-             name="author"
+             id="pageNumber"
+             aria-describedby="Page number"
+             placeholder="Page number"
+             [(ngModel)]="quote.pageNumber"
+             name="pageNumber"
       >
     </div>
-  <div class="form-group">
-    <label for="content">Quote</label>
-    <textarea
-      class="form-control"
-      rows="3"
-      id="content"
-      aria-describedby="Quotation"
-      placeholder="Quotation"
-      [(ngModel)]="quote.content"
-      name="content"
-    >
-    </textarea>
+    <div class="form-group">
+      <label for="publicationYear">Publication Year</label>
+      <input type="text"
+             class="form-control"
+             id="publicationYear"
+             aria-describedby="Year of publication"
+             placeholder="Year of publication"
+             [(ngModel)]="quote.publicationYear"
+             name="publicationYear"
+      >
+    </div>
+    <div class="form-group">
+      <label for="editorName">Editor name</label>
+      <input
+        id="editorName"
+        type="text"
+        class="form-control"
+        aria-describedby="Editor name"
+        name="editorName"
+        placeholder="Editor name"
+        [(ngModel)]="quote.editorName"
+        [ngbTypeahead]="searchEditorName"
+        (focus)="editorNameFocus$.next($event.target.value)"
+        (click)="editorNameClick$.next($event.target.value)"
+        #editorNameInstance="ngbTypeahead"
+      />
+    </div>
+    <div class="form-group">
+      <label for="remarks">Remarks</label>
+      <input type="text"
+             class="form-control"
+             id="remarks"
+             aria-describedby="Additional remarks on the Quote"
+             placeholder="Any additional remarks?"
+             [(ngModel)]="quote.remarks"
+             name="remarks"
+      >
+    </div>
+      <app-chips-input></app-chips-input>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
   </div>
-  <div class="form-group">
-    <label for="bookName">Book/Newspaper title</label>
-    <input type="text"
-           class="form-control"
-           id="bookName"
-           aria-describedby="Book name"
-           placeholder="Book title, Newspaper"
-           [(ngModel)]="quote.bookName"
-           name="bookName"
-    >
-  </div>
-  <div class="form-group">
-    <label for="pageNumber">Page number</label>
-    <input type="text"
-           class="form-control"
-           id="pageNumber"
-           aria-describedby="Page number"
-           placeholder="Book title, Newspaper"
-           [(ngModel)]="quote.pageNumber"
-           name="pageNumber"
-    >
-  </div>
-  <div class="form-group">
-    <label for="publicationYear">Publication Year</label>
-    <input type="text"
-           class="form-control"
-           id="publicationYear"
-           aria-describedby="Year of publication"
-           placeholder="Year of publication"
-           [(ngModel)]="quote.publicationYear"
-           name="publicationYear"
-    >
-  </div>
-  <div class="form-group">
-    <label for="editorName">Editor name</label>
-    <input type="text"
-           class="form-control"
-           id="editorName"
-           aria-describedby="Name of the Editor"
-           placeholder="Name of the Editor"
-           [(ngModel)]="quote.editorName"
-           name="editorName"
-    >
-  </div>
-  <div class="form-group">
-    <label for="remarks">Remarks</label>
-    <input type="text"
-           class="form-control"
-           id="remarks"
-           aria-describedby="Additional remarks on the Quote"
-           placeholder="Any additional remarks?"
-           [(ngModel)]="quote.remarks"
-           name="remarks"
-    >
-  </div>
-    <app-chips-input></app-chips-input>
-  <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
 </div>
