@@ -12,8 +12,8 @@ import {UpdateQuoteFormComponent} from './admin/update-quote-form/update-quote-f
 const routes: Routes = [
   {path: 'quotes', component: QuotesComponent, children: [
       {path: 'all', component: QuoteCardComponent},
-      {path: 'all/:id', component: QuoteCardDetailsComponent}
     ]},
+  {path: 'quotes/all/:id', component: QuoteCardDetailsComponent},
   {path: 'quotes/all/:id/update', component: UpdateQuoteFormComponent},
   {path: 'authors', component: AuthorsComponent},
   {path: 'admin', component: AddQuoteFormComponent},
