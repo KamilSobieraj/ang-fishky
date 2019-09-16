@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthorsService} from './authors.service';
 import {Quotation} from '../shared/quotation.model';
+import {QuotesService} from '../quotes/quotes.service';
 
 @Component({
   selector: 'app-authors',

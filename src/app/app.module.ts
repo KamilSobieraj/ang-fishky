@@ -1,10 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule, Pipe} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './header/navbar/navbar.component';
-import { SearchBoxComponent } from './header/navbar/search-box/search-box.component';
 import { NavbarTogglerComponent } from './header/navbar/navbar-toggler/navbar-toggler.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarDropdownComponent } from './header/navbar/navbar-dropdown/navbar-dropdown.component';
@@ -29,13 +28,13 @@ import {HttpClientModule} from '@angular/common/http';
 import { UpdateQuoteFormComponent } from './admin/update-quote-form/update-quote-form.component';
 import { BooksComponent } from './books/books.component';
 import { TagsComponent } from './tags/tags.component';
+import { QuoteCardPipe } from './quotes/quote-card.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     NavbarComponent,
-    SearchBoxComponent,
     NavbarTogglerComponent,
     NavbarDropdownComponent,
     QuotesComponent,
@@ -48,7 +47,8 @@ import { TagsComponent } from './tags/tags.component';
     ChipsInputComponent,
     UpdateQuoteFormComponent,
     BooksComponent,
-    TagsComponent
+    TagsComponent,
+    QuoteCardPipe
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

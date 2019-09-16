@@ -21,6 +21,12 @@ export class QuotesService {
     return this.firestore.collection('quotes').valueChanges({idField: 'id'});
   }
 
+  getQuotes() {
+    this.getQuotesFromDB().subscribe();
+    this.setNewQuotesSet();
+    return this.quotes;
+  }
+
   setNewQuotesSet() {
     this.isRandomModeActive ? this.quotesSet$.next(this.pickTenRandomQuotes()) : this.quotesSet$.next(this.quotes);
   }

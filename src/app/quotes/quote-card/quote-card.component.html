@@ -1,5 +1,6 @@
+<input class="form-control" type="text" name="search" [(ngModel)]="searchTerm" autocomplete="off" placeholder="🔍  Start searching for any term"> <br/>
 <ng-container
-  *ngFor="let quote of quotes; let i = index">
+  *ngFor="let quote of quotes | quoteCardFilter:searchTerm; let i = index">
   <div class="card p-3" [routerLink]="[quote.id]">
     <blockquote
       class="blockquote mb-0 card-body">

@@ -21,6 +21,8 @@
               <li class="list-group-item">Editor: {{quotation.editorName}}</li>
               <li class="list-group-item">Year of publication: {{quotation.publicationYear}}</li>
               <li *ngFor="let tag of quotation.tags" class="list-group-item">{{tag}}</li>
+
+              <li class="list-group-item">{{quotation.content}}</li>
             </ul>
           </div>
         </div>

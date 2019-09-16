@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {QuotesService} from '../quotes.service';
-import {Quotation} from '../../shared/quotation.model';
 
 @Component({
   selector: 'app-quote-card',
@@ -10,6 +9,7 @@ import {Quotation} from '../../shared/quotation.model';
 export class QuoteCardComponent implements OnInit {
   randomModeStatus: boolean;
   quotes;
+  searchTerm;
 
   constructor(private quotesService: QuotesService) {
   }

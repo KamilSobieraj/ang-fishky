@@ -15,7 +15,6 @@ export class TagsComponent implements OnInit {
 
   ngOnInit() {
     this.allQuotes = this.tagsService.getQuotesSortedByTags();
-    console.log(this.allQuotes);
   }
 
 }

@@ -12,7 +12,7 @@ export class BooksService {
   allQuotes: Quotation[];
 
   constructor(private quotesService: QuotesService) {
-    this.allQuotes = this.quotesService.quotes;
+    this.allQuotes = this.quotesService.getQuotes();
   }
 
   getQuotesSortedByBooks() {
