@@ -19,4 +19,7 @@ export class AuthorsService {
   getQuotesSortedByAuthors() {
     return mapValues(groupBy(this.allQuotes, 'author'), x => x.map(y => omit(y, 'author')));
   }
+  getAuthorCardDetails(authorName: string) {
+    return this.allQuotes.find(quote => quote.author === authorName);
+  }
 }

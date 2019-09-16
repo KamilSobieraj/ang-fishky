@@ -9,6 +9,7 @@ import {AddQuoteFormComponent} from './admin/add-quote-form/add-quote-form.compo
 import {UpdateQuoteFormComponent} from './admin/update-quote-form/update-quote-form.component';
 import {BooksComponent} from './books/books.component';
 import {TagsComponent} from './tags/tags.component';
+import {AuthorComponent} from './authors/author/author.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'quotes/all/:id', component: QuoteCardDetailsComponent},
   {path: 'quotes/all/:id/update', component: UpdateQuoteFormComponent},
   {path: 'authors', component: AuthorsComponent},
+  {path: 'authors/:authorName', component: AuthorComponent},
   {path: 'books', component: BooksComponent},
   {path: 'tags', component: TagsComponent},
   {path: 'admin', component: AddQuoteFormComponent},

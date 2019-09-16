@@ -29,6 +29,7 @@ import { UpdateQuoteFormComponent } from './admin/update-quote-form/update-quote
 import { BooksComponent } from './books/books.component';
 import { TagsComponent } from './tags/tags.component';
 import { QuoteCardPipe } from './quotes/quote-card.pipe';
+import { AuthorComponent } from './authors/author/author.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { QuoteCardPipe } from './quotes/quote-card.pipe';
     UpdateQuoteFormComponent,
     BooksComponent,
     TagsComponent,
-    QuoteCardPipe
+    QuoteCardPipe,
+    AuthorComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
