@@ -5,6 +5,10 @@
     <ngb-panel id="static-{{i}}">
       <ng-template ngbPanelTitle>
         {{book.key ? book.key : 'Not attached to any title'}}
+        <span
+          class="badge badge-pill badge-primary">
+              {{(book.value.length)}}
+            </span>
       </ng-template>
       <ng-template ngbPanelContent >
         <ul *ngFor="let book of book.value">
