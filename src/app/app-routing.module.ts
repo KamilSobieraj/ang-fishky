@@ -10,9 +10,17 @@ import {UpdateQuoteFormComponent} from './admin/update-quote-form/update-quote-f
 import {BooksComponent} from './books/books.component';
 import {TagsComponent} from './tags/tags.component';
 import {AuthorComponent} from './authors/author/author.component';
+import {LoginComponent} from './admin/login/login.component';
+import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
+import {RegisterComponent} from './admin/register/register.component';
+import {UserComponent} from './admin/user/user.component';
+import {AuthGuard} from './admin/auth.guard';
 
 
 const routes: Routes = [
+  // {path: 'login', component: LoginComponent},
+  // {path: 'register', component: RegisterComponent},
+  {path: 'user', component: UserComponent},
   {path: 'quotes', component: QuotesComponent, children: [
       {path: 'all', component: QuoteCardComponent},
     ]},
@@ -23,7 +31,7 @@ const routes: Routes = [
   {path: 'books', component: BooksComponent},
   {path: 'tags', component: TagsComponent},
   {path: 'admin', component: AddQuoteFormComponent},
-  {path: '', redirectTo: 'quotes/all', pathMatch: 'full'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 

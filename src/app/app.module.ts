@@ -30,6 +30,9 @@ import { BooksComponent } from './books/books.component';
 import { TagsComponent } from './tags/tags.component';
 import { QuoteCardPipe } from './quotes/quote-card.pipe';
 import { AuthorComponent } from './authors/author/author.component';
+import { LoginComponent } from './admin/login/login.component';
+import { RegisterComponent } from './admin/register/register.component';
+import { UserComponent } from './admin/user/user.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { AuthorComponent } from './authors/author/author.component';
     BooksComponent,
     TagsComponent,
     QuoteCardPipe,
-    AuthorComponent
+    AuthorComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
