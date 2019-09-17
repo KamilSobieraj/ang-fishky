@@ -10,17 +10,21 @@ import {UpdateQuoteFormComponent} from './admin/update-quote-form/update-quote-f
 import {BooksComponent} from './books/books.component';
 import {TagsComponent} from './tags/tags.component';
 import {AuthorComponent} from './authors/author/author.component';
-import {LoginComponent} from './admin/login/login.component';
-import {AngularFireAuthGuard} from '@angular/fire/auth-guard';
-import {RegisterComponent} from './admin/register/register.component';
-import {UserComponent} from './admin/user/user.component';
 import {AuthGuard} from './admin/auth.guard';
+import {SignInComponent} from './admin/sign-in/sign-in.component';
+import {SignUpComponent} from './admin/sign-up/sign-up.component';
+import {DashboardComponent} from './admin/dashboard/dashboard.component';
+import {ForgotPasswordComponent} from './admin/forgot-password/forgot-password.component';
+import {VerifyEmailComponent} from './admin/verify-email/verify-email.component';
+import {SecureInnerPagesGuard} from './admin/secure-inner-pages.guard';
 
 
 const routes: Routes = [
-  // {path: 'login', component: LoginComponent},
-  // {path: 'register', component: RegisterComponent},
-  {path: 'user', component: UserComponent},
+  { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'verify-email', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   {path: 'quotes', component: QuotesComponent, children: [
       {path: 'all', component: QuoteCardComponent},
     ]},
@@ -31,7 +35,7 @@ const routes: Routes = [
   {path: 'books', component: BooksComponent},
   {path: 'tags', component: TagsComponent},
   {path: 'admin', component: AddQuoteFormComponent},
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
 

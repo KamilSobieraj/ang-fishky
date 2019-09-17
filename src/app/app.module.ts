@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, Pipe} from '@angular/core';
+import {NgModule} from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -30,9 +30,11 @@ import { BooksComponent } from './books/books.component';
 import { TagsComponent } from './tags/tags.component';
 import { QuoteCardPipe } from './quotes/quote-card.pipe';
 import { AuthorComponent } from './authors/author/author.component';
-import { LoginComponent } from './admin/login/login.component';
-import { RegisterComponent } from './admin/register/register.component';
-import { UserComponent } from './admin/user/user.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { SignInComponent } from './admin/sign-in/sign-in.component';
+import { SignUpComponent } from './admin/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './admin/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -54,9 +56,11 @@ import { UserComponent } from './admin/user/user.component';
     TagsComponent,
     QuoteCardPipe,
     AuthorComponent,
-    LoginComponent,
-    RegisterComponent,
-    UserComponent
+    DashboardComponent,
+    SignInComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
