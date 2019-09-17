@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {QuotesService} from '../quotes.service';
 
 @Component({
@@ -9,7 +9,8 @@ import {QuotesService} from '../quotes.service';
 export class QuoteCardComponent implements OnInit {
   randomModeStatus: boolean;
   quotes;
-  searchTerm;
+  @Input() searchTerm;
+  // searchTerm;
 
   constructor(private quotesService: QuotesService) {
   }

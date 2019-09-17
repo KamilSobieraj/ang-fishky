@@ -14,7 +14,7 @@
       </ng-template>
       <ng-template ngbPanelContent >
         <ul *ngFor="let book of author.value; let l = count">
-          <li [routerLink]="['/quotes', 'all', book.id]">
+          <li [routerLink]="['/quotes', book.id]">
           {{book.content}}
         </li>
         </ul>

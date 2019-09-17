@@ -16,8 +16,8 @@ const routes: Routes = [
   {path: 'quotes', component: QuotesComponent, children: [
       {path: 'all', component: QuoteCardComponent},
     ]},
-  {path: 'quotes/all/:id', component: QuoteCardDetailsComponent},
-  {path: 'quotes/all/:id/update', component: UpdateQuoteFormComponent},
+  {path: 'quotes/:id', component: QuoteCardDetailsComponent},
+  {path: 'quotes/:id/update', component: UpdateQuoteFormComponent},
   {path: 'authors', component: AuthorsComponent},
   {path: 'authors/:authorName', component: AuthorComponent},
   {path: 'books', component: BooksComponent},
