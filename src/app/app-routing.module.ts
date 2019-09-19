@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'forgot-password', component: ForgotPasswordComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'verify-email', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
-  {path: 'quotes', component: QuotesComponent, children: [
+  {path: 'quotes', component: QuotesComponent, canActivate: [AuthGuard], children: [
       {path: 'all', component: QuoteCardComponent},
     ]},
   {path: 'quotes/:id', component: QuoteCardDetailsComponent},

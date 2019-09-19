@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {Quotation} from '../../shared/quotation.model';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-add-quote-form',
@@ -36,7 +37,6 @@ export class AddQuoteFormComponent implements OnInit {
               private formService: FormService,
               private router: Router) {
     this.quote = {
-      // id: '15',
       content: '',
       author: '',
       bookName: '',
@@ -53,10 +53,11 @@ export class AddQuoteFormComponent implements OnInit {
 
   // TODO: clear form in better way + clear tags field in chips-input-component
   onSubmitForm() {
+    this.quote.id = uuid.v4();
     this.quotesService.addNewQuote(this.quote);
     alert('New quotation added!');
     this.quote = {
-      // id: '15',
+      id: '',
       content: '',
       author: '',
       bookName: '',

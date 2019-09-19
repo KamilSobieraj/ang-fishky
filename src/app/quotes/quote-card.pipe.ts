@@ -6,7 +6,7 @@ import {Quotation} from '../shared/quotation.model';
 })
 export class QuoteCardPipe implements PipeTransform {
 
-  transform(terms: Quotation[], searchTerm: string): any {
+  transform(terms, searchTerm: string): any {
     if (!terms || !searchTerm) {
       return terms;
     }

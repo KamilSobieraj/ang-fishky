@@ -3,10 +3,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {auth} from 'firebase';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   userData: any;
+  user: Observable<firebase.User>;
 
   constructor(public fireAuth: AngularFireAuth,
               public firestore: AngularFirestore,
@@ -90,11 +92,14 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+      emailVerified: user.emailVerified,
     };
     return userRef.set(userData, {merge: true});
   }
+  getUserID() {
+    return JSON.parse(localStorage.getItem('user')).uid;
 
+  }
   signOut() {
     return this.fireAuth.auth.signOut()
       .then(() => {

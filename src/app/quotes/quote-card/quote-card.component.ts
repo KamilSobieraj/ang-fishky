@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {QuotesService} from '../quotes.service';
+import {async} from 'rxjs/internal/scheduler/async';
+import {tap} from 'rxjs/operators';
+import {AuthService} from '../../admin/auth.service';
+import {Quotation} from '../../shared/quotation.model';
 
 @Component({
   selector: 'app-quote-card',
@@ -8,16 +12,17 @@ import {QuotesService} from '../quotes.service';
 })
 export class QuoteCardComponent implements OnInit {
   randomModeStatus: boolean;
-  quotes;
+  quotes: Quotation[];
   @Input() searchTerm;
-  // searchTerm;
-
-  constructor(private quotesService: QuotesService) {
+  constructor(private quotesService: QuotesService, private authService: AuthService) {
   }
 
   ngOnInit() {
-    this.quotesService.getQuotesFromDB().subscribe(res => this.quotes = res);
     this.quotesService.getRandomModeStatus().subscribe(randomModeStatus => this.randomModeStatus = randomModeStatus);
     this.quotesService.getNewQuotesSet().subscribe(newQuotesSet => this.quotes = newQuotesSet);
+    this.getQuotes();
+  }
+  getQuotes() {
+    return this.quotes = this.quotesService.getQuotes();
   }
 }

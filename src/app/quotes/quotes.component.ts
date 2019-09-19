@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../admin/auth.service';
+import {QuotesService} from './quotes.service';
 
 @Component({
   selector: 'app-quotes',
@@ -6,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./quotes.component.scss']
 })
 export class QuotesComponent implements OnInit {
-  searchTerm;
-  constructor() { }
+  searchTerm: string;
+
+  constructor(private authService: AuthService,
+              private quotesService: QuotesService) {
+  }
 
   ngOnInit() {
+    this.quotesService.setNewQuotesSet();
   }
 }

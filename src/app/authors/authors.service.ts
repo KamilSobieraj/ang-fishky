@@ -12,7 +12,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 export class AuthorsService {
   allQuotes: Quotation[];
 
-  constructor(private quotesService: QuotesService, private firestore: AngularFirestore) {
+  constructor(private quotesService: QuotesService) {
     this.allQuotes = this.quotesService.getQuotes();
   }
 

@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Quotation} from '../shared/quotation.model';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {firestore} from 'firebase';
+import {AuthService} from '../admin/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,19 +12,23 @@ export class QuotesService {
   isRandomModeActive: boolean;
   private isRandomModeActive$ = new BehaviorSubject(false);
   private quotesSet$ = new Subject<Quotation[]>();
-  allQuotes: Observable<any>;
+  allUserQuotes: Observable<any>;
   quotes: Quotation[];
+  userID: string;
 
-  constructor(private firestore: AngularFirestore) {
-    this.allQuotes = this.firestore.collection('quotes').valueChanges({idField: 'id'});
-    this.allQuotes.subscribe(res => this.quotes = res);
+  constructor(private fstore: AngularFirestore,
+              private authService: AuthService) {
+    this.userID = this.authService.getUserID();
+    this.allUserQuotes = this.fstore.collection('users').doc(this.userID).valueChanges();
+    this.allUserQuotes.subscribe(res => this.quotes = res.quotes);
+    this.quotes = this.getQuotes();
   }
   getQuotesFromDB() {
-    return this.firestore.collection('quotes').valueChanges({idField: 'id'});
+    return this.fstore.collection('users').doc(this.userID).valueChanges();
   }
 
   getQuotes() {
-    this.getQuotesFromDB().subscribe();
+    this.getQuotesFromDB().subscribe(); // ? --> takes the newest data from FireBase - needed to update card display
     this.setNewQuotesSet();
     return this.quotes;
   }
@@ -54,19 +60,25 @@ export class QuotesService {
   }
 
   addNewQuote(quote) {
-    return new Promise<any>((res, rej) => {
-      this.firestore.collection('quotes').add(quote).then(res => {
-      }, err => rej(err));
+    return this.fstore.collection('users').doc(this.userID).update({
+      quotes: firestore.FieldValue.arrayUnion(quote)
     });
   }
 
   deleteQuote(quote) {
-    return this.firestore.collection('quotes').doc(quote.id).delete();
+    return this.fstore.collection('users').doc(this.userID).update({
+      quotes: firestore.FieldValue.arrayRemove(quote)
+    });
   }
 
   updateQuote(oldQuoteData, updatedQuoteData) {
-    const quote = this.firestore.doc(`quotes/${oldQuoteData.id}`);
-    quote.update({...updatedQuoteData});
-
+    const quoteId = oldQuoteData.id;
+    updatedQuoteData.id = quoteId;
+    this.fstore.collection('users').doc(this.userID).update({
+      quotes: firestore.FieldValue.arrayRemove(oldQuoteData)
+    });
+    return this.fstore.collection('users').doc(this.userID).update({
+      quotes: firestore.FieldValue.arrayUnion(updatedQuoteData)
+    });
   }
 }
