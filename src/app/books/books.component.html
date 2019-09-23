@@ -12,7 +12,7 @@
       </ng-template>
       <ng-template ngbPanelContent >
         <ul *ngFor="let book of book.value">
-          <li [routerLink]="['/quotes', 'all', book.id]">
+          <li [routerLink]="['/quotes', book.id]">
             {{book.content}}
           </li>
         </ul>

@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {Quotation} from '../shared/quotation.model';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {firestore} from 'firebase';
+import {AuthService} from '../admin/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,28 +12,34 @@ export class QuotesService {
   isRandomModeActive: boolean;
   private isRandomModeActive$ = new BehaviorSubject(false);
   private quotesSet$ = new Subject<Quotation[]>();
-  allQuotes: Observable<any>;
+  allUserQuotes: Observable<any>;
   quotes: Quotation[];
+  currentUserID: string;
 
-  constructor(private firestore: AngularFirestore) {
-    this.allQuotes = this.firestore.collection('quotes').valueChanges({idField: 'id'});
-    this.allQuotes.subscribe(res => this.quotes = res);
-  }
-  getQuotesFromDB() {
-    return this.firestore.collection('quotes').valueChanges({idField: 'id'});
+  constructor(private angularFirestore: AngularFirestore,
+              private authService: AuthService) {
   }
 
-  getQuotes() {
-    this.getQuotesFromDB().subscribe();
-    this.setNewQuotesSet();
-    return this.quotes;
+  getCurrentUserQuotesFromDB() {
+    this.authService.getCurrentUserID().subscribe(currentUserID => {
+      this.currentUserID = currentUserID;
+      console.log(currentUserID);
+      if (this.currentUserID !== '') {
+        this.allUserQuotes = this.currentUserDB().valueChanges();
+        this.allUserQuotes.subscribe(currentUserQuotes => this.quotes = currentUserQuotes.quotes);
+      }
+    });
+    // ! Don't know why have to call it again - without it, quotes doesn't display
+    this.authService.getCurrentUserID().subscribe();
   }
 
-  setNewQuotesSet() {
+  // ? Connects with current user data
+  currentUserDB() {
+    return this.angularFirestore.collection('users').doc(this.currentUserID);
+  }
+
+  getQuotesSet() {
     this.isRandomModeActive ? this.quotesSet$.next(this.pickTenRandomQuotes()) : this.quotesSet$.next(this.quotes);
-  }
-
-  getNewQuotesSet(): Observable<Quotation[]> {
     return this.quotesSet$.asObservable();
   }
 
@@ -54,19 +62,25 @@ export class QuotesService {
   }
 
   addNewQuote(quote) {
-    return new Promise<any>((res, rej) => {
-      this.firestore.collection('quotes').add(quote).then(res => {
-      }, err => rej(err));
+    return this.currentUserDB().update({
+      quotes: firestore.FieldValue.arrayUnion(quote)
     });
   }
 
   deleteQuote(quote) {
-    return this.firestore.collection('quotes').doc(quote.id).delete();
+    return this.currentUserDB().update({
+      quotes: firestore.FieldValue.arrayRemove(quote)
+    });
   }
 
   updateQuote(oldQuoteData, updatedQuoteData) {
-    const quote = this.firestore.doc(`quotes/${oldQuoteData.id}`);
-    quote.update({...updatedQuoteData});
-
+    const quoteId = oldQuoteData.id;
+    updatedQuoteData.id = quoteId;
+    this.currentUserDB().update({
+      quotes: firestore.FieldValue.arrayRemove(oldQuoteData)
+    });
+    return this.currentUserDB().update({
+      quotes: firestore.FieldValue.arrayUnion(updatedQuoteData)
+    });
   }
 }

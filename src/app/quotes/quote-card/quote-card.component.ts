@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {QuotesService} from '../quotes.service';
+import {async} from 'rxjs/internal/scheduler/async';
+import {tap} from 'rxjs/operators';
+import {AuthService} from '../../admin/auth.service';
+import {Quotation} from '../../shared/quotation.model';
 
 @Component({
   selector: 'app-quote-card',
@@ -8,15 +12,26 @@ import {QuotesService} from '../quotes.service';
 })
 export class QuoteCardComponent implements OnInit {
   randomModeStatus: boolean;
-  quotes;
-  searchTerm;
+  quotes: Quotation[];
+  @Input() searchTerm;
+
+  exampleQuote = [
+    {id: '0'},
+    {content: 'Example quotation'},
+    {author: 'Great mind'},
+    {bookName: 'Important book'},
+    {pageNumber: '123'},
+    {publicationYear: '2011'},
+    {editorName: 'Editor'},
+    {tags: ['Politics', 'Enviroment']},
+    {remarks: 'This quotation should be deleted'}
+  ];
 
   constructor(private quotesService: QuotesService) {
   }
 
   ngOnInit() {
-    this.quotesService.getQuotesFromDB().subscribe(res => this.quotes = res);
-    this.quotesService.getRandomModeStatus().subscribe(randomModeStatus => this.randomModeStatus = randomModeStatus);
-    this.quotesService.getNewQuotesSet().subscribe(newQuotesSet => this.quotes = newQuotesSet);
+    this.quotesService.getCurrentUserQuotesFromDB();
+    this.quotesService.getQuotesSet().subscribe(res => this.quotes = res);
   }
 }
