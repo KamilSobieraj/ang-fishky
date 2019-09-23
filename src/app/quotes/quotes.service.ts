@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {Quotation} from '../shared/quotation.model';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {firestore} from 'firebase';
@@ -14,6 +14,7 @@ export class QuotesService {
   private quotesSet$ = new Subject<Quotation[]>();
   allUserQuotes: Observable<any>;
   quotes: Quotation[];
+<<<<<<< HEAD
   userID: string;
 
   constructor(private fstore: AngularFirestore,
@@ -31,13 +32,34 @@ export class QuotesService {
     this.getQuotesFromDB().subscribe(); // ? --> takes the newest data from FireBase - needed to update card display
     this.setNewQuotesSet();
     return this.quotes;
+=======
+  currentUserID: string;
+
+  constructor(private angularFirestore: AngularFirestore,
+              private authService: AuthService) {
   }
 
-  setNewQuotesSet() {
+  getCurrentUserQuotesFromDB() {
+    this.authService.getCurrentUserID().subscribe(currentUserID => {
+      this.currentUserID = currentUserID;
+      console.log(currentUserID);
+      if (this.currentUserID !== '') {
+        this.allUserQuotes = this.currentUserDB().valueChanges();
+        this.allUserQuotes.subscribe(currentUserQuotes => this.quotes = currentUserQuotes.quotes);
+      }
+    });
+    // ! Don't know why have to call it again - without it, quotes doesn't display
+    this.authService.getCurrentUserID().subscribe();
+>>>>>>> noauth
+  }
+
+  // ? Connects with current user data
+  currentUserDB() {
+    return this.angularFirestore.collection('users').doc(this.currentUserID);
+  }
+
+  getQuotesSet() {
     this.isRandomModeActive ? this.quotesSet$.next(this.pickTenRandomQuotes()) : this.quotesSet$.next(this.quotes);
-  }
-
-  getNewQuotesSet(): Observable<Quotation[]> {
     return this.quotesSet$.asObservable();
   }
 
@@ -60,13 +82,21 @@ export class QuotesService {
   }
 
   addNewQuote(quote) {
+<<<<<<< HEAD
     return this.fstore.collection('users').doc(this.userID).update({
+=======
+    return this.currentUserDB().update({
+>>>>>>> noauth
       quotes: firestore.FieldValue.arrayUnion(quote)
     });
   }
 
   deleteQuote(quote) {
+<<<<<<< HEAD
     return this.fstore.collection('users').doc(this.userID).update({
+=======
+    return this.currentUserDB().update({
+>>>>>>> noauth
       quotes: firestore.FieldValue.arrayRemove(quote)
     });
   }
@@ -74,10 +104,17 @@ export class QuotesService {
   updateQuote(oldQuoteData, updatedQuoteData) {
     const quoteId = oldQuoteData.id;
     updatedQuoteData.id = quoteId;
+<<<<<<< HEAD
     this.fstore.collection('users').doc(this.userID).update({
       quotes: firestore.FieldValue.arrayRemove(oldQuoteData)
     });
     return this.fstore.collection('users').doc(this.userID).update({
+=======
+    this.currentUserDB().update({
+      quotes: firestore.FieldValue.arrayRemove(oldQuoteData)
+    });
+    return this.currentUserDB().update({
+>>>>>>> noauth
       quotes: firestore.FieldValue.arrayUnion(updatedQuoteData)
     });
   }

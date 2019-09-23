@@ -14,6 +14,7 @@ export class QuoteCardComponent implements OnInit {
   randomModeStatus: boolean;
   quotes: Quotation[];
   @Input() searchTerm;
+<<<<<<< HEAD
   constructor(private quotesService: QuotesService, private authService: AuthService) {
   }
 
@@ -24,5 +25,26 @@ export class QuoteCardComponent implements OnInit {
   }
   getQuotes() {
     return this.quotes = this.quotesService.getQuotes();
+=======
+
+  exampleQuote = [
+    {id: '0'},
+    {content: 'Example quotation'},
+    {author: 'Great mind'},
+    {bookName: 'Important book'},
+    {pageNumber: '123'},
+    {publicationYear: '2011'},
+    {editorName: 'Editor'},
+    {tags: ['Politics', 'Enviroment']},
+    {remarks: 'This quotation should be deleted'}
+  ];
+
+  constructor(private quotesService: QuotesService) {
+  }
+
+  ngOnInit() {
+    this.quotesService.getCurrentUserQuotesFromDB();
+    this.quotesService.getQuotesSet().subscribe(res => this.quotes = res);
+>>>>>>> noauth
   }
 }

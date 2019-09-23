@@ -12,7 +12,8 @@ export class BooksService {
   allQuotes: Quotation[];
 
   constructor(private quotesService: QuotesService) {
-    this.allQuotes = this.quotesService.getQuotes();
+    this.quotesService.getQuotesSet().subscribe(res => this.allQuotes = res);
+    // this.allQuotes = this.quotesService.getQuotesSet();
   }
 
   getQuotesSortedByBooks() {

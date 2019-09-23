@@ -10,8 +10,12 @@ import {QuotesService} from './quotes.service';
 export class QuotesComponent implements OnInit {
   searchTerm: string;
 
+<<<<<<< HEAD
   constructor(private authService: AuthService,
               private quotesService: QuotesService) {
+=======
+  constructor() {
+>>>>>>> noauth
   }
 
   ngOnInit() {

@@ -14,6 +14,10 @@ export class DashboardComponent implements OnInit {
   }
 
   onSignOut() {
+<<<<<<< HEAD
     this.authService.signOut();
+=======
+    this.authService.logout();
+>>>>>>> noauth
   }
 }

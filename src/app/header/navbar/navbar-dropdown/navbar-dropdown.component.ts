@@ -8,11 +8,10 @@ import {QuotesService} from '../../../quotes/quotes.service';
 })
 export class NavbarDropdownComponent implements OnInit {
 
-  constructor(private quotesService: QuotesService) { }
+  constructor() { }
 
   ngOnInit() {
   }
   onAuthorsClick() {
-    this.quotesService.setNewQuotesSet();
   }
 }
