@@ -13,12 +13,8 @@ export class AuthorsService {
   allQuotes: Quotation[];
 
   constructor(private quotesService: QuotesService) {
-<<<<<<< HEAD
-    this.allQuotes = this.quotesService.getQuotes();
-=======
     this.quotesService.getQuotesSet().subscribe(res => this.allQuotes = res);
     // this.allQuotes = this.quotesService.getQuotesSet();
->>>>>>> noauth
   }
 
   getQuotesSortedByAuthors() {

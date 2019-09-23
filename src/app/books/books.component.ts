@@ -15,7 +15,6 @@ export class BooksComponent implements OnInit {
 
   ngOnInit() {
     this.allQuotes = this.booksService.getQuotesSortedByBooks();
-    console.log(this.allQuotes);
   }
 
 }

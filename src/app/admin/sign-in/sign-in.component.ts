@@ -16,11 +16,7 @@ export class SignInComponent implements OnInit {
   }
 
   onSignIn() {
-<<<<<<< HEAD
-    this.authService.signIn(this.userEmail, this.userPassword);
-=======
     this.authService.emailLogin(this.userEmail, this.userPassword);
->>>>>>> noauth
   }
 
   onGoogleLogin() {

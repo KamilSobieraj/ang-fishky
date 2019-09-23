@@ -3,33 +3,22 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {auth} from 'firebase';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
-<<<<<<< HEAD
-import {Observable} from 'rxjs';
-=======
 import {Observable, Subject} from 'rxjs';
->>>>>>> noauth
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   userData: any;
-<<<<<<< HEAD
-  user: Observable<firebase.User>;
-=======
   currentUserID$ = new Subject<string>();
->>>>>>> noauth
 
   constructor(public fireAuth: AngularFireAuth,
               public firestore: AngularFirestore,
               public router: Router,
               public ngZone: NgZone // * NgZone service to remove outside scope warning
    ) {
-<<<<<<< HEAD
-=======
     this.userLocalStorageHandler();
   }
 
   userLocalStorageHandler() {
->>>>>>> noauth
     this.fireAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
@@ -42,26 +31,12 @@ export class AuthService {
     });
   }
 
-<<<<<<< HEAD
-  signIn(email: string, password: string) {
-    return this.fireAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(res => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        });
-        this.setUserData(res.user);
-      }).catch(err => window.alert(err.message));
-  }
-
-  signUp(email: string, password: string) {
-=======
   getCurrentUserID(): Observable<string> {
     this.currentUserID$.next(JSON.parse(localStorage.getItem('user')).uid);
     return this.currentUserID$.asObservable();
 }
 
   emailRegister(email: string, password: string) {
->>>>>>> noauth
     return this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(res => {
         this.sendVerificationEmail();
@@ -84,17 +59,11 @@ export class AuthService {
       .catch(err => window.alert(err.message));
   }
 
-<<<<<<< HEAD
-  get isLoggedIn(): boolean {
-=======
   isLoggedIn() {
->>>>>>> noauth
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
-<<<<<<< HEAD
-=======
   emailLogin(email: string, password: string) {
     return this.fireAuth.auth.signInWithEmailAndPassword(email, password)
       .then(res => {
@@ -111,7 +80,6 @@ export class AuthService {
       }).catch(err => window.alert(err.message));
   }
 
->>>>>>> noauth
   googleLogin() {
     return this.authLogin(new auth.GoogleAuthProvider());
   }
@@ -127,10 +95,7 @@ export class AuthService {
           this.router.navigate(['dashboard']);
         });
         this.setUserData(res.user);
-<<<<<<< HEAD
-=======
         this.fireAuth.authState.subscribe(resID => console.log(resID.uid));
->>>>>>> noauth
       }).catch((err) => {
         window.alert(err.message);
       });
@@ -145,22 +110,12 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
-<<<<<<< HEAD
-=======
     this.currentUserID$.next(user.id);
->>>>>>> noauth
     return userRef.set(userData, {merge: true});
   }
-  getUserID() {
-    return JSON.parse(localStorage.getItem('user')).uid;
 
-<<<<<<< HEAD
-  }
-  signOut() {
-=======
   logout() {
     this.fireAuth.authState.subscribe(res => this.currentUserID$.next(''));
->>>>>>> noauth
     return this.fireAuth.auth.signOut()
       .then(() => {
         localStorage.removeItem('user');
