@@ -2,22 +2,35 @@ import { Injectable } from '@angular/core';
 import {Quotation} from '../shared/quotation.model';
 import {QuotesService} from '../quotes/quotes.service';
 import groupBy from 'lodash.groupBy';
-import mapValues from 'lodash.mapvalues';
-import omit from 'lodash.omit';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TagsService {
   allQuotes: Quotation[];
+  tags$ = new Subject();
 
   constructor(private quotesService: QuotesService) {
-    this.allQuotes = this.quotesService.quotes;
+    this.quotesService.getCurrentUserQuotesFromDB();
+    this.loadQuotes();
+    // this.allQuotes = this.quotesService.quotes;
   }
 
-  getQuotesSortedByTags() {
+  loadQuotes() {
+    this.quotesService.getQuotesSet().subscribe(res => {
+      this.allQuotes = res;
+      this.tags$.next(res);
+    });
+  }
+
+  sortQuotesByTags(setToSort) {
     const tags = [];
-    this.allQuotes.map(quote => quote.tags.map(tag => tags.push({tagName: tag, ...quote})));
+    setToSort.map(quote => quote.tags.map(tag => tags.push({tagName: tag, ...quote})));
     return groupBy(tags, 'tagName');
+  }
+
+  getTags() {
+    return this.tags$.asObservable();
   }
 }

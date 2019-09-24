@@ -112,7 +112,6 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
-    console.log(user.id);
     if (user.id !== undefined) {
     this.currentUserID$.next(user.id);
     }

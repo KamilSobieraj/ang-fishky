@@ -4,19 +4,37 @@ import {QuotesService} from '../quotes/quotes.service';
 import groupBy from 'lodash.groupBy';
 import mapValues from 'lodash.mapvalues';
 import omit from 'lodash.omit';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
   allQuotes: Quotation[];
+  books$ = new Subject();
 
   constructor(private quotesService: QuotesService) {
-    this.quotesService.getQuotesSet().subscribe(res => this.allQuotes = res);
+    // this.quotesService.getQuotesSet().subscribe(res => this.allQuotes = res);
+    this.quotesService.getCurrentUserQuotesFromDB();
+    this.loadQuotes();
     // this.allQuotes = this.quotesService.getQuotesSet();
   }
 
-  getQuotesSortedByBooks() {
-    return mapValues(groupBy(this.allQuotes, 'bookName'), x => x.map(y => omit(y, 'bookName')));
+  loadQuotes() {
+    this.quotesService.getQuotesSet().subscribe(res => {
+      this.allQuotes = res;
+      this.books$.next(res);
+    });
   }
+
+  sortQuotesByBookNames(setToSort) {
+    return mapValues(groupBy(setToSort, 'bookName'), x => x.map(y => omit(y, 'bookName')));
+  }
+
+  getBooks() {
+    return this.books$.asObservable();
+  }
+  // getQuotesSortedByBooks() {
+  //   return mapValues(groupBy(this.allQuotes, 'bookName'), x => x.map(y => omit(y, 'bookName')));
+  // }
 }

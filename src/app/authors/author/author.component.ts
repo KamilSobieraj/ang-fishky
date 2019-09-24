@@ -4,10 +4,6 @@ import {AuthorsService} from '../authors.service';
 import {Location} from '@angular/common';
 import {WikipediaAPIService} from '../../wikipedia-api.service';
 
-interface data {
-  data: Object
-}
-
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
@@ -30,13 +26,11 @@ wikiData;
     });
     this.wikiService.getWikiData(this.authorName).subscribe(res => this.wikiData = res[2]);
   }
+
   getAuthorCardDetails() {
     this.authorDetails = this.authorsService.getAuthorCardDetails(this.authorName);
   }
-  getData() {
 
-    console.log(this.wikiData);
-  }
   onGoBack() {
     this.location.back();
   }

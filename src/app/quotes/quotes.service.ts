@@ -12,7 +12,7 @@ import {AuthService} from '../admin/auth.service';
 export class QuotesService {
   isRandomModeActive: boolean;
   private isRandomModeActive$ = new BehaviorSubject(false);
-  private quotesSet$ = new Subject<Quotation[]>();
+  public quotesSet$ = new Subject<Quotation[]>();
   allUserQuotes: Observable<any>;
   quotes: Quotation[];
   currentUserID: string;
@@ -23,17 +23,16 @@ export class QuotesService {
   }
 
   getCurrentUserQuotesFromDB() {
-    console.log('getCurrentUserQuotesFromDB');
     this.authService.getCurrentUserID().subscribe(currentUserID => {
       this.currentUserID = currentUserID;
-      console.log(currentUserID);
       if (this.currentUserID !== '') {
         this.allUserQuotes = this.currentUserDB().valueChanges();
-        this.allUserQuotes.subscribe(currentUserQuotes => this.quotes = currentUserQuotes.quotes);
+        this.allUserQuotes.subscribe(currentUserQuotes => {
+          this.quotes = currentUserQuotes.quotes;
+          this.quotesSet$.next(currentUserQuotes.quotes)
+        });
       }
     });
-    // ! Don't know why have to call it again - without it, quotes doesn't display
-    this.authService.getCurrentUserID().subscribe();
   }
 
   // ? Connects with current user data
@@ -43,7 +42,7 @@ export class QuotesService {
     }
   }
 
-  getQuotesSet() {
+  getQuotesSet(): Observable<Quotation[]> {
     this.isRandomModeActive ? this.quotesSet$.next(this.pickTenRandomQuotes()) : this.quotesSet$.next(this.quotes);
     return this.quotesSet$.asObservable();
   }

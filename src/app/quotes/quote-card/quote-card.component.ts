@@ -11,7 +11,6 @@ import {Quotation} from '../../shared/quotation.model';
   styleUrls: ['./quote-card.component.scss']
 })
 export class QuoteCardComponent implements OnInit {
-  randomModeStatus: boolean;
   quotes: Quotation[];
   @Input() searchTerm;
 
@@ -32,7 +31,6 @@ export class QuoteCardComponent implements OnInit {
 
   ngOnInit() {
     this.quotesService.getCurrentUserQuotesFromDB();
-    console.log('quoteCardComponent onInit');
-    this.quotesService.getQuotesSet().subscribe(res => {this.quotes = res; console.log(res)});
+    this.quotesService.getQuotesSet().subscribe(currentUserQuotes => this.quotes = currentUserQuotes);
   }
 }
