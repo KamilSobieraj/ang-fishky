@@ -8,6 +8,7 @@ import {AuthService} from '../admin/auth.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class QuotesService {
   isRandomModeActive: boolean;
   private isRandomModeActive$ = new BehaviorSubject(false);
@@ -18,9 +19,11 @@ export class QuotesService {
 
   constructor(private angularFirestore: AngularFirestore,
               private authService: AuthService) {
+    this.getCurrentUserQuotesFromDB();
   }
 
   getCurrentUserQuotesFromDB() {
+    console.log('getCurrentUserQuotesFromDB');
     this.authService.getCurrentUserID().subscribe(currentUserID => {
       this.currentUserID = currentUserID;
       console.log(currentUserID);
@@ -35,7 +38,9 @@ export class QuotesService {
 
   // ? Connects with current user data
   currentUserDB() {
+    if (this.currentUserID !== undefined) {
     return this.angularFirestore.collection('users').doc(this.currentUserID);
+    }
   }
 
   getQuotesSet() {

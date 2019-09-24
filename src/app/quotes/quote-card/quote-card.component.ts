@@ -32,6 +32,7 @@ export class QuoteCardComponent implements OnInit {
 
   ngOnInit() {
     this.quotesService.getCurrentUserQuotesFromDB();
-    this.quotesService.getQuotesSet().subscribe(res => this.quotes = res);
+    console.log('quoteCardComponent onInit');
+    this.quotesService.getQuotesSet().subscribe(res => {this.quotes = res; console.log(res)});
   }
 }

@@ -32,7 +32,9 @@ export class AuthService {
   }
 
   getCurrentUserID(): Observable<string> {
+    if (JSON.parse(localStorage.getItem('user')) !== null) {
     this.currentUserID$.next(JSON.parse(localStorage.getItem('user')).uid);
+    }
     return this.currentUserID$.asObservable();
 }
 
@@ -95,7 +97,7 @@ export class AuthService {
           this.router.navigate(['dashboard']);
         });
         this.setUserData(res.user);
-        this.fireAuth.authState.subscribe(resID => console.log(resID.uid));
+        // this.fireAuth.authState.subscribe(resID => console.log(resID.uid));
       }).catch((err) => {
         window.alert(err.message);
       });
@@ -110,7 +112,10 @@ export class AuthService {
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
     };
+    console.log(user.id);
+    if (user.id !== undefined) {
     this.currentUserID$.next(user.id);
+    }
     return userRef.set(userData, {merge: true});
   }
 
