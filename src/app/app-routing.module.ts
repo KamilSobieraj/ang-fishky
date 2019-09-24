@@ -30,11 +30,11 @@ const routes: Routes = [
     ]},
   {path: 'quotes/:id', component: QuoteCardDetailsComponent},
   {path: 'quotes/:id/update', component: UpdateQuoteFormComponent},
-  {path: 'authors', component: AuthorsComponent},
+  {path: 'authors', component: AuthorsComponent, canActivate: [AuthGuard]},
   {path: 'authors/:authorName', component: AuthorComponent},
-  {path: 'books', component: BooksComponent},
-  {path: 'tags', component: TagsComponent},
-  {path: 'admin', component: AddQuoteFormComponent},
+  {path: 'books', component: BooksComponent, canActivate: [AuthGuard]},
+  {path: 'tags', component: TagsComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: AddQuoteFormComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: '**', component: PageNotFoundComponent}
 ];
