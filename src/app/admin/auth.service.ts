@@ -1,6 +1,6 @@
 import {Injectable, NgZone} from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {auth} from 'firebase';
+import {auth, firestore} from 'firebase';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
@@ -9,11 +9,21 @@ import {Observable, Subject} from 'rxjs';
 export class AuthService {
   userData: any;
   currentUserID$ = new Subject<string>();
+  initialQuoteData = {
+    content: 'Initial Quote. You can delete it and add your own one.',
+    author: 'Bot',
+    bookName: 'Bot Book',
+    pageNumber: '69',
+    publicationYear: '2019',
+    editorName: 'Bot & CO',
+    tags: [],
+    remarks: 'This is is an example.'
+  };
 
   constructor(public fireAuth: AngularFireAuth,
-              public firestore: AngularFirestore,
+              public angularFirestore: AngularFirestore,
               public router: Router,
-              public ngZone: NgZone // * NgZone service to remove outside scope warning
+              public ngZone: NgZone, // * NgZone service to remove outside scope warning
    ) {
     this.userLocalStorageHandler();
   }
@@ -97,6 +107,7 @@ export class AuthService {
           this.router.navigate(['dashboard']);
         });
         this.setUserData(res.user);
+        console.log(res.user);
         // this.fireAuth.authState.subscribe(resID => console.log(resID.uid));
       }).catch((err) => {
         window.alert(err.message);
@@ -104,7 +115,7 @@ export class AuthService {
   }
 
   setUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.firestore.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(`users/${user.uid}`);
     const userData = {
       uid: user.uid,
       email: user.email,
@@ -117,6 +128,7 @@ export class AuthService {
     }
     return userRef.set(userData, {merge: true});
   }
+
 
   logout() {
     this.fireAuth.authState.subscribe(res => this.currentUserID$.next(''));

@@ -9,31 +9,27 @@ import {debounceTime, distinctUntilChanged, map} from 'rxjs/operators';
 })
 export class FormService {
   private formTags$ = new Subject<string[]>();
-  private formAllTags$ = new Subject<[]>();
   tags: string[] = [];
   quotes: Quotation[];
 
   constructor(private quotesService: QuotesService) {
     this.quotes = this.quotesService.quotes;
   }
-  getQuotes() {
-   const authors = this.quotes.map(quote => quote.author);
-   return authors;
-  }
+
   getValuesOfProperty(propertyName) {
+    if (this.quotes) {
      const filteredValues = this.quotes.map(quote => quote[propertyName]);
      return [...new Set(filteredValues)];
+    }
   }
 
   setFormTags(newTag) {
     this.tags.push(newTag);
     this.formTags$.next(this.tags);
   }
+
   getFormTags(): Observable<string[]> {
     return this.formTags$.asObservable();
-  }
-  getAllTags(): Observable<string[]> {
-    return this.formAllTags$.asObservable();
   }
 
   searchTemplate(propertyName: string, propertyClick, propertyFocus) {
