@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../admin/auth.service';
 
 @Component({
@@ -7,7 +7,6 @@ import {AuthService} from '../admin/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private authService: AuthService) {
   }
 

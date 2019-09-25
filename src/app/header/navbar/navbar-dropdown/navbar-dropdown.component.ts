@@ -12,6 +12,4 @@ export class NavbarDropdownComponent implements OnInit {
 
   ngOnInit() {
   }
-  onAuthorsClick() {
-  }
 }

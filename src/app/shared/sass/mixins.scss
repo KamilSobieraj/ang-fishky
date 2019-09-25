@@ -1,0 +1,30 @@
+//RWD mixins
+@mixin for-phone {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-portrait-and-up {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin for-tablet-landscape-and-up {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+
+@mixin for-desctop-and-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin for-big-screen-and-up {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}

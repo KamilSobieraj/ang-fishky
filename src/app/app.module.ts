@@ -35,6 +35,8 @@ import { SignInComponent } from './admin/sign-in/sign-in.component';
 import { SignUpComponent } from './admin/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './admin/verify-email/verify-email.component';
+import { WavesComponent } from './header/waves/waves.component';
+import { LogoComponent } from './header/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { VerifyEmailComponent } from './admin/verify-email/verify-email.componen
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    WavesComponent,
+    LogoComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

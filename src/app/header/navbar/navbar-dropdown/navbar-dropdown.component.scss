@@ -1,8 +1,18 @@
-.baton{
-  color: black;
-  border: none;
-  &:hover, &:active{
-    color: white;
-    background-color: black;
+@import "../../../shared/sass/variables";
+
+.dropdown {
+  &__main {
+    color: $color-font-primary;
+  }
+
+  &__list {
+    margin-top: 10px;
+    border-radius: 5px;
+
+    &-element {
+      &:hover {
+        background-color: rgba($color-primary, 0.1);
+      }
+    }
   }
 }

@@ -1,0 +1,46 @@
+@import "../../shared/sass/variables";
+@import '../../shared/sass/mixins';
+
+.navbar {
+  color: $color-primary;
+  list-style: none;
+  display: flex;
+  align-content: space-around;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  border: none;
+  border-radius: 10em;
+  background: $color-bg-primary;
+  box-shadow: 0 20px 25px #00000044;
+  padding: 10px;
+  margin-bottom: 50px;
+
+  &__element {
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    padding: 0.6em 2em;
+    font-size: 1.2em;
+    color: $color-font-primary;
+
+    &:hover{
+      border-radius: 10em;
+      border: 1px solid $color-secondary;
+      background: $color-bg-secondary;
+    }
+    &:focus {
+      border-radius: 10em;
+      color: $color-font-secondary;
+      background-color: $color-primary;
+      transition: all 1s cubic-bezier(0.23, 1, 0.32, 1.05);
+    }
+    &.newQuote {
+      color: $color-primary;
+      font-weight: bold;
+      &:focus {
+        color: $color-font-secondary;
+      }
+    }
+  }
+}
