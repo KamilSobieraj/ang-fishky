@@ -1,0 +1,35 @@
+@import "../../shared/sass/variables";
+
+.quote-card {
+  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+  &::after {
+    width: 10em;
+    height: 10em;
+    display: block;
+    background-color: $color-primary;
+    content: " ";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    opacity: .1;
+    transform: translate(30%, 30%);
+    border-radius: 50%;
+  }
+
+  &__content {
+    &::before {
+      content: "“";
+      color: #E0DDD7;
+      font-family: georgia, serif;
+      font-size: 6em;
+      position: absolute;
+      top: -0.25em;
+      left: 0;
+      opacity: 0.5;
+    }
+  }
+}
