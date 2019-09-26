@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {QuotesService} from '../../../quotes/quotes.service';
 
 @Component({
   selector: 'app-navbar-dropdown',

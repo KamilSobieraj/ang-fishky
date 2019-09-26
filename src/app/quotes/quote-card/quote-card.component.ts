@@ -1,8 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {QuotesService} from '../quotes.service';
-import {async} from 'rxjs/internal/scheduler/async';
-import {tap} from 'rxjs/operators';
-import {AuthService} from '../../admin/auth.service';
 import {Quotation} from '../../shared/quotation.model';
 
 @Component({

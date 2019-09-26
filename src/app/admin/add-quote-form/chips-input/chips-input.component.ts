@@ -22,7 +22,7 @@ export class ChipsInputComponent implements OnInit{
   tagCtrl = new FormControl();
   filteredTags: Observable<string[]>;
   tags: string[] = [];
-  allTags: string[] = ['Polityka', 'Środowisko'];
+  allTags: string[] = [];
 
   @ViewChild('tagInput', {static: false}) tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
@@ -33,7 +33,7 @@ export class ChipsInputComponent implements OnInit{
       map((tag: string | null) => tag ? this._filter(tag) : this.allTags.slice()));
   }
   ngOnInit() {
-    this.formService.getFormTags().subscribe(tags => this.tags = tags);
+    this.formService.getFormTags().subscribe(tags => {this.tags = tags; console.log(tags)});
   }
 
   add(event: MatChipInputEvent): void {

@@ -14,10 +14,8 @@ export class BooksService {
   books$ = new Subject();
 
   constructor(private quotesService: QuotesService) {
-    // this.quotesService.getQuotesSet().subscribe(res => this.allQuotes = res);
     this.quotesService.getCurrentUserQuotesFromDB();
     this.loadQuotes();
-    // this.allQuotes = this.quotesService.getQuotesSet();
   }
 
   loadQuotes() {
@@ -34,7 +32,4 @@ export class BooksService {
   getBooks() {
     return this.books$.asObservable();
   }
-  // getQuotesSortedByBooks() {
-  //   return mapValues(groupBy(this.allQuotes, 'bookName'), x => x.map(y => omit(y, 'bookName')));
-  // }
 }
