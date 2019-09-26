@@ -1,5 +1,11 @@
 <div class="container">
-  <input class="form-control" type="text" name="search" [(ngModel)]="searchTerm" autocomplete="off" placeholder="🔍  Start searching for any term"> <br/>
+  <input
+    class="form-control search-bar"
+    type="text"
+    name="search"
+    [(ngModel)]="searchTerm"
+    autocomplete="off"
+    placeholder="Start searching for any term"> <br/>
   <div class="row">
     <div class="card-columns">
       <app-quote-card [searchTerm] = "searchTerm"></app-quote-card>

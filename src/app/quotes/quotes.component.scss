@@ -1,0 +1,13 @@
+@import "../shared/sass/variables";
+
+.search-bar {
+  background: $color-bg-secondary url("../../assets/icon-search.png") no-repeat 9px center;
+  width: 30%;
+  transition: all 0.5s;
+  padding-left: 2em;
+
+  &:focus {
+    width: 100%;
+    box-shadow: $color-secondary;
+  }
+}

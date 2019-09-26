@@ -1,1 +1,12 @@
+@import "shared/sass/variables";
 
+html{
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.app-wrapper {
+  background-color: $color-bg-primary;
+}
