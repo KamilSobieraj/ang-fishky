@@ -37,6 +37,7 @@ import { ForgotPasswordComponent } from './admin/forgot-password/forgot-password
 import { VerifyEmailComponent } from './admin/verify-email/verify-email.component';
 import { WavesComponent } from './header/waves/waves.component';
 import { LogoComponent } from './header/logo/logo.component';
+import { AccordionComponent } from './shared/accordion/accordion.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { LogoComponent } from './header/logo/logo.component';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     WavesComponent,
-    LogoComponent
+    LogoComponent,
+    AccordionComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

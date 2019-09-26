@@ -1,0 +1,24 @@
+<div class="row justify-content-center">
+  <ngb-accordion
+    *ngFor="let item of object | keyvalue; let i = index"
+    [closeOthers]="true"
+    activeIds="static-1"
+    class="col-8">
+    <ngb-panel id="static-{{i}}">
+      <ng-template ngbPanelTitle>
+        {{item.key ? item.key : 'Anonymous'}}
+        <span
+          class="badge badge-pill badge-primary">
+              {{(item.value.length)}}
+            </span>
+      </ng-template>
+      <ng-template ngbPanelContent >
+        <ul *ngFor="let element of item.value; let l = count">
+          <li [routerLink]="['/quotes', element.id]">
+            {{element.content}}
+          </li>
+        </ul>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>
