@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Quotation} from '../shared/quotation.model';
-import {AuthorsService} from '../authors/authors.service';
 import {BooksService} from './books.service';
-import {Subscription} from 'rxjs';
 import {QuotesService} from '../quotes/quotes.service';
+import { takeUntil } from 'rxjs/operators';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-books',
@@ -12,7 +11,6 @@ import {QuotesService} from '../quotes/quotes.service';
 })
 export class BooksComponent implements OnInit, OnDestroy {
   books: {};
-  booksSub: Subscription;
 
   constructor(private booksService: BooksService,
               private quotesService: QuotesService) { }
@@ -23,13 +21,12 @@ export class BooksComponent implements OnInit, OnDestroy {
   }
 
   getBooks() {
-  this.booksSub = this.booksService.getBooks().subscribe(quotes => {
+    this.booksService.getBooks().pipe(takeUntil(componentDestroyed(this))).subscribe(quotes => {
     this.books = this.booksService.sortQuotesByBookNames(quotes);
   });
   }
 
   ngOnDestroy(): void {
-    this.booksSub.unsubscribe();
   }
 
 }

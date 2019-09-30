@@ -1,17 +1,19 @@
 // TODO: fix go back button (it always navigate to all, but never to random)
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Quotation} from '../../shared/quotation.model';
 import {QuotesService} from '../quotes.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
+import {takeUntil} from 'rxjs/operators';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-quote-card-details',
   templateUrl: './quote-card-details.component.html',
   styleUrls: ['./quote-card-details.component.scss']
 })
-export class QuoteCardDetailsComponent implements OnInit {
+export class QuoteCardDetailsComponent implements OnInit, OnDestroy {
 quotation: Quotation;
 id: string;
   constructor(private quotesService: QuotesService,
@@ -19,7 +21,7 @@ id: string;
               private location: Location) { }
 
   ngOnInit() {
-      this.router.params.subscribe((params: Params) => {
+      this.router.params.pipe(takeUntil(componentDestroyed(this))).subscribe((params: Params) => {
       this.id = params['id'];
       this.getQuoteCardDetails();
     });
@@ -34,5 +36,8 @@ id: string;
   onDeleteQuoteCard(quote) {
     this.quotesService.deleteQuote(quote);
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
   }
 }

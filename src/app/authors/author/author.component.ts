@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {AuthorsService} from '../authors.service';
 import {Location} from '@angular/common';
 import {WikipediaAPIService} from '../../wikipedia-api.service';
+import {takeUntil} from 'rxjs/operators';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-author',
   templateUrl: './author.component.html',
   styleUrls: ['./author.component.scss']
 })
-export class AuthorComponent implements OnInit {
+export class AuthorComponent implements OnInit, OnDestroy {
 authorName: string;
 authorDetails;
 wikiData;
@@ -20,11 +22,11 @@ wikiData;
   }
 
   ngOnInit() {
-    this.router.params.subscribe((params: Params) => {
+    this.router.params.pipe(takeUntil(componentDestroyed(this))).subscribe((params: Params) => {
       this.authorName = params['authorName'];
       this.getAuthorCardDetails();
     });
-    this.wikiService.getWikiData(this.authorName).subscribe(res => this.wikiData = res[2]);
+    this.wikiService.getWikiData(this.authorName).pipe(takeUntil(componentDestroyed(this))).subscribe(res => this.wikiData = res[2]);
   }
 
   getAuthorCardDetails() {
@@ -33,5 +35,8 @@ wikiData;
 
   onGoBack() {
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
   }
 }

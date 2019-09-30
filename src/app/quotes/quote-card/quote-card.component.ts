@@ -1,13 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {QuotesService} from '../quotes.service';
 import {Quotation} from '../../shared/quotation.model';
+import {takeUntil} from 'rxjs/operators';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-quote-card',
   templateUrl: './quote-card.component.html',
   styleUrls: ['./quote-card.component.scss']
 })
-export class QuoteCardComponent implements OnInit {
+export class QuoteCardComponent implements OnInit, OnDestroy {
   quotes: Quotation[];
   @Input() searchTerm;
 
@@ -28,6 +30,10 @@ export class QuoteCardComponent implements OnInit {
 
   ngOnInit() {
     this.quotesService.getCurrentUserQuotesFromDB();
-    this.quotesService.getQuotesSet().subscribe(currentUserQuotes => this.quotes = currentUserQuotes);
+    this.quotesService.getQuotesSet().pipe(takeUntil(componentDestroyed(this))).subscribe(
+      currentUserQuotes => this.quotes = currentUserQuotes);
+  }
+
+  ngOnDestroy(): void {
   }
 }

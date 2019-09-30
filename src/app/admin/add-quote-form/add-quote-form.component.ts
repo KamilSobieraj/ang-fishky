@@ -3,21 +3,23 @@
 // TODO: make inputs reusable - part input into separate components
 // TODO: validators?
 
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {QuotesService} from '../../quotes/quotes.service';
 import {FormService} from './form.service';
 import {Router} from '@angular/router';
 import {Quotation} from '../../shared/quotation.model';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import * as uuid from 'uuid';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-quote-form',
   templateUrl: './add-quote-form.component.html',
   styleUrls: ['./add-quote-form.component.scss']
 })
-export class AddQuoteFormComponent implements OnInit {
+export class AddQuoteFormComponent implements OnInit, OnDestroy {
   quote: Quotation;
   @ViewChild('authorInstance', {static: true}) authorInstance: NgbTypeahead;
   authorFocus$ = new Subject<string>();
@@ -48,7 +50,7 @@ export class AddQuoteFormComponent implements OnInit {
     };
   }
   ngOnInit() {
-    this.formService.getFormTags().subscribe(tags => this.quote.tags = tags);
+    this.formService.getFormTags().pipe(takeUntil(componentDestroyed(this))).subscribe(tags => this.quote.tags = tags);
   }
 
   // TODO: clear form in better way + clear tags field in chips-input-component
@@ -68,5 +70,8 @@ export class AddQuoteFormComponent implements OnInit {
       remarks: ''
     };
     this.router.navigate(['quotes/all']);
+  }
+
+  ngOnDestroy(): void {
   }
 }

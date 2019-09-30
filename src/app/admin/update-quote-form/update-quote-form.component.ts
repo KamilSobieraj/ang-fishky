@@ -1,7 +1,7 @@
 // TODO: fix chips - old ones appears when new chip is added
 // TODO: add choose list for authors, books etc.
 
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {QuotesService} from '../../quotes/quotes.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {FormService} from '../add-quote-form/form.service';
@@ -9,13 +9,15 @@ import {Location} from '@angular/common';
 import {Quotation} from '../../shared/quotation.model';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
 import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-update-quote-form',
   templateUrl: './update-quote-form.component.html',
   styleUrls: ['./update-quote-form.component.scss']
 })
-export class UpdateQuoteFormComponent implements OnInit {
+export class UpdateQuoteFormComponent implements OnInit, OnDestroy {
   chosenQuote: Quotation;
   quote: Quotation;
   id: string;
@@ -41,12 +43,12 @@ export class UpdateQuoteFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
+    this.activatedRoute.params.pipe(takeUntil(componentDestroyed(this))).subscribe((params: Params) => {
       this.id = params['id'];
       this.getQuoteCardDetails();
     });
 
-    this.formService.getFormTags().subscribe(tags => this.quote.tags = tags);
+    this.formService.getFormTags().pipe(takeUntil(componentDestroyed(this))).subscribe(tags => this.quote.tags = tags);
 
     this.quote = {
       content: this.chosenQuote.content,
@@ -68,5 +70,8 @@ export class UpdateQuoteFormComponent implements OnInit {
     this.quotesService.updateQuote(this.chosenQuote, this.quote);
     alert('Quotation updated!');
     this.location.back();
+  }
+
+  ngOnDestroy(): void {
   }
 }

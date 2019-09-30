@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
+    "@w11k/ngx-componentdestroyed": "^4.1.4",
     "angularfire2": "^5.2.1",
     "bootstrap": "^4.3.1",
     "firebase": "^6.6.0",

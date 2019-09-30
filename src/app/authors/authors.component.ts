@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthorsService} from './authors.service';
 import {QuotesService} from '../quotes/quotes.service';
 import {Subscription} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-authors',
@@ -10,7 +12,7 @@ import {Subscription} from 'rxjs';
 })
 export class AuthorsComponent implements OnInit, OnDestroy {
   authors: {};
-  authorsSub: Subscription;
+
   constructor(private authorsService: AuthorsService,
               private quotesService: QuotesService) { }
 
@@ -20,12 +22,11 @@ export class AuthorsComponent implements OnInit, OnDestroy {
   }
 
   getAuthors() {
-    this.authorsSub = this.authorsService.getAuthors().subscribe(quotes => {
+    this.authorsService.getAuthors().pipe(takeUntil(componentDestroyed(this))).subscribe(quotes => {
       this.authors = this.authorsService.sortQuotesByAuthors(quotes);
     });
   }
 
   ngOnDestroy(): void {
-    this.authorsSub.unsubscribe();
   }
 }

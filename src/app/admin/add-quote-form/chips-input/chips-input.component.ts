@@ -1,11 +1,12 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {map, startWith, takeUntil} from 'rxjs/operators';
 import {FormService} from '../form.service';
+import {componentDestroyed} from '@w11k/ngx-componentdestroyed';
 
 @Component({
   selector: 'app-chips-input',
@@ -13,7 +14,7 @@ import {FormService} from '../form.service';
   styleUrls: ['./chips-input.component.scss']
 })
 
-export class ChipsInputComponent implements OnInit{
+export class ChipsInputComponent implements OnInit, OnDestroy{
   visible = true;
   selectable = true;
   removable = true;
@@ -33,7 +34,7 @@ export class ChipsInputComponent implements OnInit{
       map((tag: string | null) => tag ? this._filter(tag) : this.allTags.slice()));
   }
   ngOnInit() {
-    this.formService.getFormTags().subscribe(tags => {this.tags = tags; console.log(tags)});
+    this.formService.getFormTags().pipe(takeUntil(componentDestroyed(this))).subscribe(tags => this.tags = tags);
   }
 
   add(event: MatChipInputEvent): void {
@@ -75,5 +76,8 @@ export class ChipsInputComponent implements OnInit{
     const filterValue = value.toLowerCase();
 
     return this.allTags.filter(tag => tag.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  ngOnDestroy(): void {
   }
 }
